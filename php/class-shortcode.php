@@ -59,9 +59,10 @@ class Shortcode {
 					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="background-color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
 					<div class="description">
 						<?php the_field( 'tweet_pitch' ); ?>
-						<a href="<?php the_permalink(); ?>">Learn More…</a>
+						<!-- <a href="<?php the_permalink(); ?>">Learn More…</a> -->
 					</div>
 					<?php $flint_plugin->project->display_field( 'roles' ); ?>
+					<a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a>
 				</article>
 				<?php
 			}

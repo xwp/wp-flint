@@ -3,7 +3,15 @@ Welcome to Custom CSS!
 
 To learn how this works, see http://wp.me/PEmnE-Bt
 */
-
+* {
+	transition: 0.2s;
+}
+.projects-archive .project {
+	border-radius: 3px;
+	overflow: hidden;
+	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+	padding: 1em;
+}
 .projects-archive .entry-title {
 	background: #444;
 	padding: 1em;
@@ -15,20 +23,20 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 .projects-archive .description {
 	padding: 1em;
 	font-size: 14px;
-	border-left: 1px solid #c6c6c6;
-	border-right: 1px solid #c6c6c6;
+	/*border-left: 1px solid #c6c6c6;*/
+	/*border-right: 1px solid #c6c6c6;*/
 }
 .projects-archive .project .roles {
-	border: 1px solid #c6c6c6;
-	padding: 0.5em 1em 0;
+	/*border: 1px solid #c6c6c6;*/
+	padding: 1em;
 	background: #f7f7f7;
 }
 .projects-archive .project .roles li {
 	display: inline-block;
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	padding: 0;
-	margin: 0 2px  0.5em;
+	margin: 0 2px 0;
 }
 .projects-archive .project .roles li .avatar.empty {
 	width: 100%;
@@ -42,6 +50,25 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 .projects-archive .project .roles .role, .projects-archive .project .roles .name {
 	display: none;
 }
+.projects-archive .project .learn-more-link {
+	display: block;
+	/*position: absolute;*/
+	right: 1em;
+	bottom: 1em;
+	box-shadow: none;
+	font-family: 'Montserrat', sans-serif;
+	border: 2px solid #ddd;
+	color: #ddd;
+	padding: 6px 12px;
+	font-size: 0.8rem;
+	border-radius: 2px;
+	text-align: center;
+}
+.projects-archive .project .learn-more-link:hover {
+	border: 2px solid #FF4400;
+	color: #FF4400;
+}
+
 
 .single-project article .entry-header {
 	color: #fff;
@@ -230,9 +257,56 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 	width: 96px;
 	height: 96px;
 	border-radius: 50%;
-	background: radial-gradient(circle, #666, #444);
-	box-shadow: inset 0 0 10px #222;
+	/*background: radial-gradient(circle, #666, #444);*/
+	/*box-shadow: inset 0 0 10px #222;*/
+	/*background-color: #aaa;*/
 	margin: 0 auto;
+}
+.projects-archive .roles li:nth-child(1) .avatar.empty {
+	border: 2px solid rgba(255,68,0,1);
+}
+.projects-archive .roles li:nth-child(2) .avatar.empty {
+	border: 2px solid rgba(255,68,0,0.7);
+}
+.projects-archive .roles li:nth-child(3) .avatar.empty {
+	border: 2px solid rgba(255,68,0,0.5);
+}
+.projects-archive .roles li:nth-child(4) .avatar.empty {
+	border: 2px solid rgba(255,68,0,0.3);
+}
+.projects-archive .roles li:nth-child(5) .avatar.empty {
+	border: 2px solid rgba(255,68,0,0.1);
+}
+.projects-archive .roles li:nth-child(6) .avatar.empty {
+	border: 2px solid rgba(255,68,0,0.5);
+}
+.projects-archive .roles li:last-child .avatar.empty:after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 2px;
+	height: 14px;
+	/*color: rgba(255,68,0,0.5);*/
+	background-color: rgba(255,68,0,0.5);
+	left: 50%;
+	margin-left: -1px;
+	top: 50%;
+	margin-top: -7px;
+
+}
+.projects-archive .roles li:last-child .avatar.empty:before {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 2px;
+	height: 14px;
+	/*color: rgba(255,68,0,0.5);*/
+	background-color: rgba(255,68,0,0.5);
+	left: 50%;
+	margin-left: -1px;
+	top: 50%;
+	margin-top: -7px;
+	transform: rotate(90deg);
 }
 .roles li .open .avatar.empty:hover {
 	background: rgba(0,0,0,0);
