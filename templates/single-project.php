@@ -20,7 +20,7 @@ get_header(); ?>
 					<div class="feature-color" style="background-color: <?php the_field( 'feature_color' ); ?>"></div>
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<?php the_field( 'tweet_pitch' ); ?>
-					<?php $flint_plugin->project->display_field( 'roles' ); ?>
+					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
 				</header>
 
 				<div class="entry-content">
@@ -45,11 +45,11 @@ get_header(); ?>
 				</div>
 
 				<div class="entry-content business-model">
-					<?php $flint_plugin->project->display_field( 'business_model' ); ?>
+					<?php $flint_plugin->projects->display_field( 'business_model' ); ?>
 				</div>
 
 				<div class="entry-content timeline">
-					<?php $flint_plugin->project->display_field( 'timeline' ); ?>
+					<?php $flint_plugin->projects->display_field( 'timeline' ); ?>
 				</div>
 
 				<footer class="entry-footer">

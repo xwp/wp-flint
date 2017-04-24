@@ -57,11 +57,12 @@ class Shortcode {
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="background-color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
+					<?php $flint_plugin->projects->likes->display(); ?>
 					<div class="description">
 						<?php the_field( 'tweet_pitch' ); ?>
 						<a href="<?php the_permalink(); ?>">Learn More…</a>
 					</div>
-					<?php $flint_plugin->project->display_field( 'roles' ); ?>
+					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
 				</article>
 				<?php
 			}
