@@ -10,26 +10,27 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 	border-radius: 3px;
 	overflow: hidden;
 	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
-	padding: 1em;
+	padding: 2em;
 }
 .projects-archive .entry-title {
-	background: #444;
-	padding: 1em;
-	color: #fff;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
-	text-align: center;
-	margin: 0;
+	/*background: #444;*/
+	/*padding: 1em;*/
+	/*color: #fff;*/
+	/*text-shadow: 1px 1px 1px rgba(0,0,0,0.3);*/
+	/*text-align: center;*/
+	/*margin: 0;*/
 }
 .projects-archive .description {
-	padding: 1em;
+	/*padding: 1em;*/
 	font-size: 14px;
 	/*border-left: 1px solid #c6c6c6;*/
 	/*border-right: 1px solid #c6c6c6;*/
 }
 .projects-archive .project .roles {
 	/*border: 1px solid #c6c6c6;*/
-	padding: 1em;
+	/*padding: 1em;*/
 	background: #f7f7f7;
+	margin-bottom: 1em;
 }
 .projects-archive .project .roles li {
 	display: inline-block;

@@ -56,7 +56,7 @@ class Shortcode {
 				$query->the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="background-color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
+					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
 					<div class="description">
 						<?php the_field( 'tweet_pitch' ); ?>
 						<!-- <a href="<?php the_permalink(); ?>">Learn More…</a> -->
