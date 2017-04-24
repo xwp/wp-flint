@@ -15,9 +15,9 @@ class Plugin extends Plugin_Base {
 	/**
 	 * Project post type.
 	 *
-	 * @var Project
+	 * @var Projects
 	 */
-	public $project;
+	public $projects;
 
 	/**
 	 * Shortcode.
@@ -39,8 +39,8 @@ class Plugin extends Plugin_Base {
 		$this->config = apply_filters( 'flint_plugin_config', $this->config, $this );
 
 		if ( class_exists( 'acf_pro' ) ) {
-			$this->project = new Project();
-			$this->add_doc_hooks( $this->project );
+			$this->projects = new Projects();
+			$this->add_doc_hooks( $this->projects );
 
 			$this->shortcode = new Shortcode();
 			$this->add_doc_hooks( $this->shortcode );
