@@ -14,7 +14,7 @@ class Likes {
 	 *
 	 * @var string
 	 */
-	public $meta_key;
+	public $meta_key = 'likes';
 
 	/**
 	 * Get the post ID for the current post.
@@ -60,7 +60,7 @@ class Likes {
 		$post_id = $this->get_post_id( $post_id );
 		$likes   = get_post_meta( $post_id, $this->meta_key, true );
 
-		if ( ! $likes ) {
+		if ( ! $likes || empty( $likes ) ) {
 			$likes = array();
 		}
 
@@ -114,21 +114,30 @@ class Likes {
 		$post_id = $this->get_post_id( $post_id );
 		$this->save();
 
-		if ( $this->is_liked( $post_id, get_current_user_id() ) ) {
-			?>
-			<a href="javascript:document.getElementById('unlike-<?php echo esc_attr( $post_id ); ?>').submit();" class="likes unlike"><?php _e( 'Unlike', 'flint' ); ?></a>
-			<form method="post" id="unlike-<?php echo esc_attr( $post_id ); ?>">
-				<input type="hidden" name="unlike-post" value="<?php echo esc_attr( $post_id ); ?>"/>
-			</form>
+		?>
+		<div class="likes">
+			<span class="total"><?php echo esc_html( $this->total( $post_id ) ); ?></span>
+
 			<?php
-		} else {
+
+			if ( $this->is_liked( $post_id, get_current_user_id() ) ) {
+				?>
+				<a href="javascript:document.getElementById('unlike-<?php echo esc_attr( $post_id ); ?>').submit();" class="unlike"><?php _e( 'Unlike', 'flint' ); ?></a>
+				<form method="post" id="unlike-<?php echo esc_attr( $post_id ); ?>">
+					<input type="hidden" name="unlike-post" value="<?php echo esc_attr( $post_id ); ?>"/>
+				</form>
+				<?php
+			} else {
+				?>
+				<a href="javascript:document.getElementById('like-<?php echo esc_attr( $post_id ); ?>').submit();" class="like"><?php _e( 'Like', 'flint' ); ?></a>
+				<form method="post" id="like-<?php echo esc_attr( $post_id ); ?>">
+					<input type="hidden" name="like-post" value="<?php echo esc_attr( $post_id ); ?>"/>
+				</form>
+				<?php
+			}
 			?>
-			<a href="javascript:document.getElementById('like-<?php echo esc_attr( $post_id ); ?>').submit();" class="likes like"><?php _e( 'Like', 'flint' ); ?></a>
-			<form method="post" id="like-<?php echo esc_attr( $post_id ); ?>">
-				<input type="hidden" name="like-post" value="<?php echo esc_attr( $post_id ); ?>"/>
-			</form>
-			<?php
-		}
+		</div>
+		<?php
 	}
 
 	/**
