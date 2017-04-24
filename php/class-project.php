@@ -7,7 +7,7 @@
 
 namespace Flint;
 
-class Project {
+class Projects {
 
 	/**
 	 * Custom field groups.
@@ -15,6 +15,13 @@ class Project {
 	 * @var Field_Group[]
 	 */
 	public $custom_field_groups;
+
+	/**
+	 * Likes.
+	 *
+	 * @var Likes
+	 */
+	public $likes;
 
 	/**
 	 * Register post types.
@@ -68,6 +75,15 @@ class Project {
 		foreach ( $this->custom_field_groups as $custom_field_group ) {
 			$custom_field_group->register_fields();
 		}
+	}
+
+	/**
+	 * Register likes.
+	 *
+	 * @action init
+	 */
+	public function register_likes() {
+		$this->likes = new Likes();
 	}
 
 	/**
