@@ -56,13 +56,13 @@ class Shortcode {
 				$query->the_post();
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="background-color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
+					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
 					<?php $flint_plugin->projects->likes->display(); ?>
 					<div class="description">
 						<?php the_field( 'tweet_pitch' ); ?>
-						<a href="<?php the_permalink(); ?>">Learn More…</a>
 					</div>
 					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
+					<a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a>
 				</article>
 				<?php
 			}
