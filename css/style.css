@@ -6,6 +6,9 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 * {
 	transition: 0.2s;
 }
+.site-branding .custom-logo-link img {
+	max-width: 100px;
+}
 .projects-archive .project {
 	border-radius: 3px;
 	overflow: hidden;
