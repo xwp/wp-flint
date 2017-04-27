@@ -28,6 +28,7 @@ class Shortcode {
 		$atts = shortcode_atts(
 			array(
 				'open' => '',
+				'following' => '',
 			),
 			$atts
 		);
@@ -42,6 +43,18 @@ class Shortcode {
 		if ( 'false' === $atts['open'] || false === $atts['open'] ) {
 			$args['meta_key']   = 'is_open';
 			$args['meta_value'] = '0';
+		}
+
+		if ( is_user_logged_in() ) {
+			$meta_key = get_plugin_instance()->projects->likes->meta_key;
+			$likes = get_user_meta( get_current_user_id(), $meta_key, true );
+
+			if ( 'true' === $atts['following'] || true === $atts['following'] ) {
+				$args['post__in'] = $likes;
+			}
+			if ( 'false' === $atts['following'] || false === $atts['following'] ) {
+				$args['post__not_in'] = $likes;
+			}
 		}
 
 		$query = new \WP_Query( $args );
