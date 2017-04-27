@@ -124,14 +124,14 @@ class Likes {
 				?>
 				<a href="javascript:document.getElementById('unlike-<?php echo esc_attr( $post_id ); ?>').submit();" class="unlike"><?php _e( 'Unlike', 'flint' ); ?></a>
 				<form method="get" id="unlike-<?php echo esc_attr( $post_id ); ?>">
-					<input type="hidden" name="unlike-post" value="<?php echo esc_attr( $post_id ); ?>"/>
+					<input type="hidden" name="unlike" value="<?php echo esc_attr( $post_id ); ?>"/>
 				</form>
 				<?php
 			} else {
 				?>
 				<a href="javascript:document.getElementById('like-<?php echo esc_attr( $post_id ); ?>').submit();" class="like"><?php _e( 'Like', 'flint' ); ?></a>
 				<form method="get" id="like-<?php echo esc_attr( $post_id ); ?>">
-					<input type="hidden" name="like-post" value="<?php echo esc_attr( $post_id ); ?>"/>
+					<input type="hidden" name="like" value="<?php echo esc_attr( $post_id ); ?>"/>
 				</form>
 				<?php
 			}
@@ -144,12 +144,12 @@ class Likes {
 	 * Save submitted likes form.
 	 */
 	public function save() {
-		if ( isset( $_REQUEST['like-post'] ) && is_user_logged_in() ) {
-			$post_id = filter_var( $_REQUEST['like-post'], FILTER_VALIDATE_INT );
+		if ( isset( $_REQUEST['like'] ) && is_user_logged_in() ) {
+			$post_id = filter_var( $_REQUEST['like'], FILTER_VALIDATE_INT );
 			$this->add( $post_id, get_current_user_id() );
 		}
-		if ( isset( $_REQUEST['unlike-post'] ) && is_user_logged_in() ) {
-			$post_id = filter_var( $_REQUEST['unlike-post'], FILTER_VALIDATE_INT );
+		if ( isset( $_REQUEST['unlike'] ) && is_user_logged_in() ) {
+			$post_id = filter_var( $_REQUEST['unlike'], FILTER_VALIDATE_INT );
 			$this->remove( $post_id, get_current_user_id() );
 		}
 	}
