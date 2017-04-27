@@ -340,3 +340,6 @@ h6 {
 .likes a.like:after {
 	color: #E5F3FF;
 }
+.likes a:hover.like:after {
+	color: #ff4401;
+}
