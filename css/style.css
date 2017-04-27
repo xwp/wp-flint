@@ -6,26 +6,47 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 * {
 	transition: 0.2s;
 }
+body {
+	font-family: 'Lato', sans-serif !important;
+	/*color: #788C94 !important;*/
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Lato', sans-serif !important;
+	font-weight: 300 !important;
+}
 .site-branding .custom-logo-link img {
 	max-width: 100px;
 }
 .projects-archive .project {
 	border-radius: 3px;
 	overflow: hidden;
-	box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.1);
-	padding: 2em;
+	box-shadow: 5px 5px 50px 0px rgba(214,231,239,0.2);
+	/*padding: 2em;*/
 	background-color: #fff;
 }
-.projects-archive .description {
+.projects-archive .project .entry-title {
+	/*font-size: 14px;*/
+	padding: 20px 40px 0;
+}
+.projects-archive .project .description {
 	font-size: 14px;
+	padding: 0 40px;
 }
 .projects-archive .project .roles {
-	margin-bottom: 1em;
+	/*margin-bottom: 1em;*/
+	padding: 20px 40px 20px;
+	border-top: 2px solid #f4f4f4;
+	margin-top: 20px;
 }
 .projects-archive .project .roles li {
 	display: inline-block;
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
 	padding: 0;
 	margin: 0 2px 0;
 }
@@ -241,7 +262,7 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 	font-weight: bold;
 }
 .roles li img.avatar {
-	border: 1px solid rgba(0,0,0,0.33);
+	/*border: 1px solid rgba(0,0,0,0.33);*/
 }
 .roles li .open img.avatar {
 	position: absolute;
@@ -258,24 +279,26 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 	/*box-shadow: inset 0 0 10px #222;*/
 	background-color: #fff;
 	margin: 0 auto;
+	background-color: rgba(255,68,0,0.1);
 }
 .projects-archive .roles li:nth-child(1) .avatar.empty {
-	border: 2px solid rgba(255,68,0,1);
+	/*border: 2px solid rgba(255,68,0,1);*/
+	/*background-color: rgba(255,68,0,0.3);*/
 }
 .projects-archive .roles li:nth-child(2) .avatar.empty {
-	border: 2px solid rgba(255,68,0,0.7);
+	/*border: 2px solid rgba(255,68,0,0.7);*/
 }
 .projects-archive .roles li:nth-child(3) .avatar.empty {
-	border: 2px solid rgba(255,68,0,0.5);
+	/*border: 2px solid rgba(255,68,0,0.5);*/
 }
 .projects-archive .roles li:nth-child(4) .avatar.empty {
-	border: 2px solid rgba(255,68,0,0.3);
+	/*border: 2px solid rgba(255,68,0,0.3);*/
 }
 .projects-archive .roles li:nth-child(5) .avatar.empty {
-	border: 2px solid rgba(255,68,0,0.1);
+	/*border: 2px solid rgba(255,68,0,0.1);*/
 }
 .projects-archive .roles li:nth-child(6) .avatar.empty {
-	border: 2px solid rgba(255,68,0,0.5);
+	/*border: 2px solid rgba(255,68,0,0.5);*/
 }
 .roles li .open .avatar.empty:hover {
 	background: rgba(0,0,0,0);
@@ -295,16 +318,16 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 }
 .likes {
 	position: absolute;
-	top: 1em;
-	right: 1em;
+	top: 14px;
+    right: 20px;
 }
 .likes span {
 	position: relative;
 	font-size: 0.8em;
 	display: inline-block;
-	top: -6px;
+	top: -7px;
 	font-family: 'Montserrat', sans-serif;
-	font-weight: 700;
+	font-weight: 400;
 }
 .likes a {
 	font-size: 0;
@@ -315,5 +338,5 @@ To learn how this works, see http://wp.me/PEmnE-Bt
 	font-size: 1.4rem;
 }
 .likes a.like:after {
-	color: #ddd;
+	color: #E5F3FF;
 }

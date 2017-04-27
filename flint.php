@@ -55,3 +55,13 @@ function _flint_php_version_error() {
 function _flint_php_version_text() {
 	return __( 'Flint plugin error: Your version of PHP is too old to run this plugin. You must be running PHP 5.3 or higher.', 'flint' );
 }
+
+// Enqueue Google Fonts
+function _flint_google_fonts() {
+	$query_args = array(
+		'family' => 'Lato:400,700|Oswald:700'
+	);
+	wp_register_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
+    }
+            
+add_action('wp_enqueue_scripts', '_flint_google_fonts');
