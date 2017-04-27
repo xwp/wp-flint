@@ -22,63 +22,7 @@ h6 {
 .site-branding .custom-logo-link img {
 	max-width: 100px;
 }
-.projects-archive .project {
-	border-radius: 3px;
-	overflow: hidden;
-	box-shadow: 5px 5px 50px 0px rgba(214,231,239,0.2);
-	/*padding: 2em;*/
-	background-color: #fff;
-}
-.projects-archive .project .entry-title {
-	/*font-size: 14px;*/
-	padding: 20px 40px 0;
-}
-.projects-archive .project .description {
-	font-size: 14px;
-	padding: 0 40px;
-}
-.projects-archive .project .roles {
-	/*margin-bottom: 1em;*/
-	padding: 20px 40px 20px;
-	border-top: 2px solid #f4f4f4;
-	margin-top: 20px;
-}
-.projects-archive .project .roles li {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	padding: 0;
-	margin: 0 2px 0;
-}
-.projects-archive .project .roles li .avatar.empty {
-	width: 100%;
-	height: 100%;
-	display: block;
-}
-.projects-archive .project .roles li > div {
-	width: 100%;
-	height: 100%;
-}
-.projects-archive .project .roles .role, .projects-archive .project .roles .name {
-	display: none;
-}
-.projects-archive .project .learn-more-link {
-	display: block;
-	right: 1em;
-	bottom: 1em;
-	box-shadow: none;
-	font-family: 'Montserrat', sans-serif;
-	border: 2px solid #aaa;
-	color: #aaa;
-	padding: 6px 12px;
-	font-size: 0.8rem;
-	border-radius: 2px;
-	text-align: center;
-}
-.projects-archive .project .learn-more-link:hover {
-	border: 2px solid #FF4400;
-	color: #FF4400;
-}
+
 
 
 .single-project article .entry-header {
