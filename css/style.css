@@ -3,22 +3,7 @@ Welcome to Custom CSS!
 
 To learn how this works, see http://wp.me/PEmnE-Bt
 */
-* {
-	transition: 0.2s;
-}
-body {
-	font-family: 'Lato', sans-serif !important;
-	/*color: #788C94 !important;*/
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: 'Lato', sans-serif !important;
-	font-weight: 300 !important;
-}
+
 .site-branding .custom-logo-link img {
 	max-width: 100px;
 }
@@ -225,25 +210,6 @@ h6 {
 	margin: 0 auto;
 	background-color: rgba(255,68,0,0.1);
 }
-.projects-archive .roles li:nth-child(1) .avatar.empty {
-	/*border: 2px solid rgba(255,68,0,1);*/
-	/*background-color: rgba(255,68,0,0.3);*/
-}
-.projects-archive .roles li:nth-child(2) .avatar.empty {
-	/*border: 2px solid rgba(255,68,0,0.7);*/
-}
-.projects-archive .roles li:nth-child(3) .avatar.empty {
-	/*border: 2px solid rgba(255,68,0,0.5);*/
-}
-.projects-archive .roles li:nth-child(4) .avatar.empty {
-	/*border: 2px solid rgba(255,68,0,0.3);*/
-}
-.projects-archive .roles li:nth-child(5) .avatar.empty {
-	/*border: 2px solid rgba(255,68,0,0.1);*/
-}
-.projects-archive .roles li:nth-child(6) .avatar.empty {
-	/*border: 2px solid rgba(255,68,0,0.5);*/
-}
 .roles li .open .avatar.empty:hover {
 	background: rgba(0,0,0,0);
 }
@@ -259,31 +225,4 @@ h6 {
 }
 .roles li .avatar.empty:hover .join {
 	color: #fff;
-}
-.likes {
-	position: absolute;
-	top: 14px;
-    right: 20px;
-}
-.likes span {
-	position: relative;
-	font-size: 0.8em;
-	display: inline-block;
-	top: -7px;
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 400;
-}
-.likes a {
-	font-size: 0;
-}
-.likes a:after {
-	content: "\f487";
-	font-family: 'Dashicons';
-	font-size: 1.4rem;
-}
-.likes a.like:after {
-	color: #E5F3FF;
-}
-.likes a:hover.like:after {
-	color: #ff4401;
 }
