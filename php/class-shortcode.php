@@ -28,7 +28,7 @@ class Shortcode {
 		$atts = shortcode_atts(
 			array(
 				'open' => '',
-				'following' => '',
+				'likes' => '',
 			),
 			$atts
 		);
@@ -49,10 +49,10 @@ class Shortcode {
 			$meta_key = get_plugin_instance()->projects->likes->meta_key;
 			$likes = get_user_meta( get_current_user_id(), $meta_key, true );
 
-			if ( 'true' === $atts['following'] || true === $atts['following'] ) {
+			if ( 'true' === $atts['likes'] || true === $atts['likes'] ) {
 				$args['post__in'] = $likes;
 			}
-			if ( 'false' === $atts['following'] || false === $atts['following'] ) {
+			if ( 'false' === $atts['likes'] || false === $atts['likes'] ) {
 				$args['post__not_in'] = $likes;
 			}
 		}
