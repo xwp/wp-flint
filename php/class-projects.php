@@ -71,10 +71,20 @@ class Projects {
 			'timeline'       => new Timeline(),
 			'feature_color'  => new Feature_Color(),
 		);
+	}
 
-		foreach ( $this->custom_field_groups as $custom_field_group ) {
-			$custom_field_group->register_fields();
-		}
+	/**
+	 * Load custom field json.
+	 *
+	 * @filter acf/settings/load_json
+	 *
+	 * @param array $paths
+	 * @return array $paths
+	 */
+	public function load_custom_field_json( $paths ) {
+		$plugin = get_plugin_instance();
+		$paths[] = $plugin->dir_path . '/acf-json';
+		return $paths;
 	}
 
 	/**

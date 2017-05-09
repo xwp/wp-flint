@@ -1,0 +1,118 @@
+{
+    "key": "group_59111329a956e",
+    "title": "Business Model",
+    "fields": [
+        {
+            "key": "field_591113721aaab",
+            "label": "Delivery Activities",
+            "name": "delivery_activities",
+            "type": "textarea",
+            "instructions": "Which key activities do our…<br />- value propositions require?<br />- partners perform?<br />- customer relationships require?<br />- revenue streams require?",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_591114651aaac",
+            "label": "Value Proposition",
+            "name": "value_proposition",
+            "type": "textarea",
+            "instructions": "What value do we deliver to the customer?<br />Which one of our customer's problems are we helping to solve?",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 4,
+            "rows": "",
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_591114f81aaad",
+            "label": "Customer Profile",
+            "name": "customer_profile",
+            "type": "textarea",
+            "instructions": "For whom are we creating value?<br />Through which channels do customers want to be reached?<br />What type of relationship do our customers expect us to maintain?",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_5911153f1aaae",
+            "label": "Cost Structure",
+            "name": "cost_structure",
+            "type": "textarea",
+            "instructions": "What are the most important costs inherent in our business model?",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": "wpautop"
+        },
+        {
+            "key": "field_5911155e1aaaf",
+            "label": "Revenue Streams",
+            "name": "revenue_streams",
+            "type": "textarea",
+            "instructions": "For what value are our customers willing to pay?",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": "wpautop"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "project"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "left",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}
