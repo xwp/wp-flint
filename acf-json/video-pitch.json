@@ -1,13 +1,13 @@
 {
-    "key": "group_591144e49ea9f",
-    "title": "Summary",
+    "key": "group_591146ae60075",
+    "title": "Video Pitch",
     "fields": [
         {
-            "key": "field_591144f1901e0",
-            "label": "Tweet Pitch",
-            "name": "tweet_pitch",
-            "type": "textarea",
-            "instructions": "140 character summary.",
+            "key": "field_591146bb11e00",
+            "label": "YouTube URL",
+            "name": "youtube_url",
+            "type": "url",
+            "instructions": "Link to a YouTube video.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,10 +16,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "",
-            "maxlength": 140,
-            "rows": 4,
-            "new_lines": "wpautop"
+            "placeholder": "https:\/\/youtube.com\/watch?v=0123456789"
         }
     ],
     "location": [
@@ -31,7 +28,7 @@
             }
         ]
     ],
-    "menu_order": 1,
+    "menu_order": 0,
     "position": "side",
     "style": "default",
     "label_placement": "top",

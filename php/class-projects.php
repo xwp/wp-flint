@@ -64,13 +64,14 @@ class Projects {
 	 * @action init
 	 */
 	public function register_custom_fields() {
-		$this->custom_field_groups = array(
+		$this->custom_field_groups = apply_filters( 'flint_custom_field_groups', array(
 			'business_model' => new Business_Model(),
 			'summary'        => new Summary(),
 			'roles'          => new Roles(),
 			'timeline'       => new Timeline(),
 			'feature_color'  => new Feature_Color(),
-		);
+			'video_pitch'    => new Video_Pitch(),
+		) );
 	}
 
 	/**
