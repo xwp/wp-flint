@@ -17,22 +17,21 @@ get_header(); ?>
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<header class="entry-header">
-					<div class="feature-color" style="background-color: <?php the_field( 'feature_color' ); ?>"></div>
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<?php the_field( 'tweet_pitch' ); ?>
 					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
 				</header>
 
-				<div class="entry-content">
+				<div class="entry-content container">
 					<?php $flint_plugin->projects->display_field( 'video_pitch' ); ?>
 				</div>
 
-				<div class="entry-content">
+				<div class="entry-content container">
 					<h2><?php _e( 'Overview', 'flint' ); ?></h2>
 					<?php the_content(); ?>
 				</div>
 
-				<div class="entry-content role-descriptions">
+				<div class="entry-content role-descriptions container">
 					<h2><?php _e( 'Team Roles', 'flint' ); ?></h2>
 					<?php
 					while( have_rows( 'roles' ) ) {
@@ -52,7 +51,7 @@ get_header(); ?>
 					<?php $flint_plugin->projects->display_field( 'business_model' ); ?>
 				</div>
 
-				<div class="entry-content timeline">
+				<div class="entry-content timeline container">
 					<?php $flint_plugin->projects->display_field( 'timeline' ); ?>
 				</div>
 

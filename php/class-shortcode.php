@@ -73,9 +73,9 @@ class Shortcode {
 					<?php $flint_plugin->projects->likes->display(); ?>
 					<div class="description">
 						<?php the_field( 'tweet_pitch' ); ?>
+						<p><a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a></p>
 					</div>
 					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
-					<a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a>
 				</article>
 				<?php
 			}
