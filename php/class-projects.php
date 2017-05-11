@@ -64,17 +64,28 @@ class Projects {
 	 * @action init
 	 */
 	public function register_custom_fields() {
-		$this->custom_field_groups = array(
+		$this->custom_field_groups = apply_filters( 'flint_custom_field_groups', array(
 			'business_model' => new Business_Model(),
 			'summary'        => new Summary(),
 			'roles'          => new Roles(),
 			'timeline'       => new Timeline(),
 			'feature_color'  => new Feature_Color(),
-		);
+			'video_pitch'    => new Video_Pitch(),
+		) );
+	}
 
-		foreach ( $this->custom_field_groups as $custom_field_group ) {
-			$custom_field_group->register_fields();
-		}
+	/**
+	 * Load custom field json.
+	 *
+	 * @filter acf/settings/load_json
+	 *
+	 * @param array $paths
+	 * @return array $paths
+	 */
+	public function load_custom_field_json( $paths ) {
+		$plugin = get_plugin_instance();
+		$paths[] = $plugin->dir_path . '/acf-json';
+		return $paths;
 	}
 
 	/**

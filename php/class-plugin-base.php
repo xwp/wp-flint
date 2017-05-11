@@ -226,9 +226,6 @@ abstract class Plugin_Base {
 		$class_name = get_class( $object );
 		if ( isset( $this->_called_doc_hooks[ $class_name ] ) ) {
 			$notice = sprintf( 'The add_doc_hooks method was already called on %s. Note that the Plugin_Base constructor automatically calls this method.', $class_name );
-			if ( ! $this->is_wpcom_vip_prod() ) {
-				trigger_error( esc_html( $notice ), \E_USER_NOTICE );
-			}
 			return;
 		}
 		$this->_called_doc_hooks[ $class_name ] = true;
@@ -237,7 +234,7 @@ abstract class Plugin_Base {
 		foreach ( $reflector->getMethods() as $method ) {
 			$doc = $method->getDocComment();
 			$arg_count = $method->getNumberOfParameters();
-			if ( preg_match_all( '#\* @(?P<type>filter|action)\s+(?P<name>[a-z0-9\-\._]+)(?:,\s+(?P<priority>\d+))?#', $doc, $matches, PREG_SET_ORDER ) ) {
+			if ( preg_match_all( '#\* @(?P<type>filter|action)\s+(?P<name>[a-z0-9\-\._/]+)(?:,\s+(?P<priority>\d+))?#', $doc, $matches, PREG_SET_ORDER ) ) {
 				foreach ( $matches as $match ) {
 					$type = $match['type'];
 					$name = $match['name'];

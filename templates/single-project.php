@@ -24,6 +24,10 @@ get_header(); ?>
 				</header>
 
 				<div class="entry-content">
+					<?php $flint_plugin->projects->display_field( 'video_pitch' ); ?>
+				</div>
+
+				<div class="entry-content">
 					<h2><?php _e( 'Overview', 'flint' ); ?></h2>
 					<?php the_content(); ?>
 				</div>

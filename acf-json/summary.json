@@ -1,0 +1,42 @@
+{
+    "key": "group_591144e49ea9f",
+    "title": "Summary",
+    "fields": [
+        {
+            "key": "field_591144f1901e0",
+            "label": "Tweet Pitch",
+            "name": "tweet_pitch",
+            "type": "textarea",
+            "instructions": "140 character summary.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": 140,
+            "rows": 4,
+            "new_lines": "wpautop"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "project"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}

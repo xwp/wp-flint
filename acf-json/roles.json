@@ -1,0 +1,142 @@
+{
+    "key": "group_591143427a45e",
+    "title": "Roles",
+    "fields": [
+        {
+            "key": "field_5911434cdca88",
+            "label": "Roles",
+            "name": "roles",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 1,
+            "max": 0,
+            "layout": "row",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_59114378dca89",
+                    "label": "Role",
+                    "name": "role",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "None": "None",
+                        "Architect": "Architect",
+                        "Designer": "Designer",
+                        "Engineer": "Engineer",
+                        "Frontend Engineer": "Frontend Engineer",
+                        "Product Owner": "Product Owner",
+                        "QA": "QA",
+                        "Team Lead": "Team Lead",
+                        "User Experience": "User Experience",
+                        "Other": "Other"
+                    },
+                    "default_value": [
+                        "None"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_591143f2dca8a",
+                    "label": "Role Title",
+                    "name": "role_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_59114378dca89",
+                                "operator": "==",
+                                "value": "Other"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_59114413dca8b",
+                    "label": "Role Description",
+                    "name": "role_description",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "new_lines": "wpautop"
+                },
+                {
+                    "key": "field_59114426dca8c",
+                    "label": "User",
+                    "name": "user",
+                    "type": "user",
+                    "instructions": "Leave empty if the role is currently available.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "role": "",
+                    "allow_null": 1,
+                    "multiple": 0
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "project"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}
