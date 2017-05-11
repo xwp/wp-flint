@@ -47,7 +47,7 @@ get_header(); ?>
 					?>
 				</div>
 
-				<div class="entry-content business-model">
+				<div class="entry-content business-model container">
 					<?php $flint_plugin->projects->display_field( 'business_model' ); ?>
 				</div>
 
