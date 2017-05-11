@@ -1,21 +1,21 @@
 /*Project Archive Tiles*/
 .projects-archive {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 }
 .projects-archive .project {
 	margin-bottom: 30px;
-    position: relative;
-    padding-bottom: 72px;
-    border: 1px solid #ccc;
+	position: relative;
+	padding-bottom: 72px;
+	border: 1px solid #ccc;
 	overflow: hidden;
 	background-color: #fff;
 }
 @media screen and (min-width: 910px) {
-    .projects-archive .project {
-        width: 48%;
-    }
+	.projects-archive .project {
+		width: 48%;
+	}
 }
 .projects-archive .project .entry-title {
 	padding: 20px 40px 0;
@@ -80,8 +80,8 @@
 .projects-archive .project .roles {
 	position: absolute;
 	width: 100%;
-    bottom: 0;
-    left: 0;
+	bottom: 0;
+	left: 0;
 	padding: 20px 40px 20px;
 	border-top: 1px solid #ccc;
 	text-align: left;
@@ -110,7 +110,7 @@
 .likes {
 	position: absolute;
 	top: 14px;
-    right: 20px;
+	right: 20px;
 }
 .likes span {
 	position: relative;
