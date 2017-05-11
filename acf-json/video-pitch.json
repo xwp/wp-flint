@@ -1,0 +1,39 @@
+{
+    "key": "group_591146ae60075",
+    "title": "Video Pitch",
+    "fields": [
+        {
+            "key": "field_591146bb11e00",
+            "label": "YouTube URL",
+            "name": "youtube_url",
+            "type": "url",
+            "instructions": "Link to a YouTube video.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "https:\/\/youtube.com\/watch?v=0123456789"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "project"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "side",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": ""
+}
