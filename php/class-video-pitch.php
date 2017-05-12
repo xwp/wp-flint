@@ -1,6 +1,6 @@
 <?php
 /**
- * Sets up the Business Model custom field group.
+ * Sets up the Video Pitch custom field group.
  *
  * @package Flint
  */
