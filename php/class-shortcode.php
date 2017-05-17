@@ -23,7 +23,7 @@ class Shortcode {
 	 * @return string
 	 */
 	public function display( $atts ) {
-		global $flint_plugin;
+		$plugin = get_plugin_instance();
 
 		$atts = shortcode_atts(
 			array(
@@ -33,7 +33,7 @@ class Shortcode {
 			$atts
 		);
 
-		$args = array( 'post_type'  => array( 'project' ) );
+		$args = array( 'post_type'  => array( $plugin->projects->key ) );
 
 		if ( 'true' === $atts['open'] || true === $atts['open'] ) {
 			$args['meta_key']   = 'is_open';
@@ -70,12 +70,12 @@ class Shortcode {
 				?>
 				<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 					<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
-					<?php $flint_plugin->projects->likes->display(); ?>
+					<?php $plugin->projects->likes->display(); ?>
 					<div class="description">
 						<?php the_field( 'tweet_pitch' ); ?>
 						<p><a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a></p>
 					</div>
-					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
+					<?php $plugin->projects->display_field( 'roles' ); ?>
 				</article>
 				<?php
 			}

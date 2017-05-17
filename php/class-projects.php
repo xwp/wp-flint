@@ -24,6 +24,13 @@ class Projects {
 	public $likes;
 
 	/**
+	 * Post type key.
+	 *
+	 * @var String
+	 */
+	public $key = 'project';
+
+	/**
 	 * Register post types.
 	 *
 	 * @action init
@@ -49,13 +56,13 @@ class Projects {
 			'capability_type'     => 'post',
 			'map_meta_cap'        => true,
 			'hierarchical'        => false,
-			'rewrite'             => array( 'slug' => 'project', 'with_front' => true ),
+			'rewrite'             => array( 'slug' => $this->key, 'with_front' => true ),
 			'query_var'           => true,
 			'menu_icon'           => 'dashicons-pressthis',
 			'supports'            => array( 'title', 'editor', 'comments' ),
 		);
 
-		register_post_type( 'project', $args );
+		register_post_type( $this->key, $args );
 	}
 
 	/**
@@ -119,7 +126,7 @@ class Projects {
 	public function project_template( $template ) {
 		global $flint_plugin;
 
-		if ( is_singular( 'project' ) ) {
+		if ( is_singular( $this->key ) ) {
 			$template = locate_template( 'single-project.php' );
 			if ( ! $template ) {
 				$template = $flint_plugin->dir_path . '/templates/single-project.php';
@@ -137,7 +144,7 @@ class Projects {
 	 * @return array
 	 */
 	public function project_comments_template( $defaults ) {
-		if ( is_singular( 'project' ) ) {
+		if ( is_singular( $this->key ) ) {
 			$defaults['title_reply'] = __( 'Questions & Suggestions', 'flint' );
 		}
 		return $defaults;
@@ -152,7 +159,7 @@ class Projects {
 	 * @param \WP_Post $post
 	 */
 	public function update_project_meta( $post_id, $post ) {
-		if ( 'project' !== $post->post_type ) {
+		if ( $this->key !== $post->post_type ) {
 			return;
 		}
 
