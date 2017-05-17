@@ -74,11 +74,17 @@ class Projects {
 		$this->custom_field_groups = apply_filters( 'flint_custom_field_groups', array(
 			'business_model' => new Business_Model(),
 			'summary'        => new Summary(),
+			'stage'          => new Stage(),
 			'roles'          => new Roles(),
 			'timeline'       => new Timeline(),
 			'feature_color'  => new Feature_Color(),
 			'video_pitch'    => new Video_Pitch(),
 		) );
+
+		$plugin = get_plugin_instance();
+		foreach ( $this->custom_field_groups as $custom_field_group ) {
+			$plugin->add_doc_hooks( $custom_field_group );
+		}
 	}
 
 	/**
