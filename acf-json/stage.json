@@ -17,9 +17,7 @@
             },
             "choices": {
                 "open": "Open",
-                "ready": "Pre-Approved",
-                "active": "Active",
-                "done": "Launched"
+                "active": "Active"
             },
             "allow_null": 0,
             "other_choice": 0,

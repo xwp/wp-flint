@@ -29,9 +29,7 @@ class Stage implements Field_Group {
 	public function __construct() {
 		$this->stages = array(
 			'open' => __( 'Open', 'flint' ),
-			'ready' => __( 'Pre-Approved', 'flint' ),
 			'active' => __( 'Active', 'flint' ),
-			'done' => __( 'Launched', 'flint' ),
 		);
 
 		$plugin = get_plugin_instance();
@@ -52,7 +50,12 @@ class Stage implements Field_Group {
 	 * @action add_meta_boxes
 	 */
 	public function add_meta_box() {
+		if ( current_user_can( 'edit_others_posts' ) ) {
+			return;
+		}
+
 		$plugin = get_plugin_instance();
+
 		add_meta_box(
 			'stage',
 			__( 'Stage', 'flint' ),
@@ -80,7 +83,26 @@ class Stage implements Field_Group {
 	 * @return array
 	 */
 	public function add_post_view( $views ) {
+		if ( ! current_user_can( 'edit_others_posts' ) ) {
+			return $views;
+		}
+
+		foreach ( $this->stages as $stage => $label ) {
+			$views[] = $this->get_post_view( $stage );
+		}
+
+		return $views;
+	}
+
+	/**
+	 * Get the HTML for a Stage filter on the Edit Projects screen
+	 *
+	 * @param string $stage
+	 * @return string
+	 */
+	public function get_post_view( $stage ) {
 		$plugin = get_plugin_instance();
+		$input  = sanitize_key( filter_input( INPUT_GET, 'stage' ) );
 
 		wp_reset_query();
 		/**
@@ -90,33 +112,30 @@ class Stage implements Field_Group {
 			'posts_per_page' => -1,
 			'post_type'      => $plugin->projects->key,
 			'meta_key'       => 'stage',
-			'meta_value'     => 'ready',
+			'meta_value'     => $stage,
 			'fields'         => 'ids',
 			'no_found_rows'  => true,
 		);
 
-		$ready_projects       = new \WP_Query( $args );
-		$ready_projects_count = count( $ready_projects->posts );
-		$ready_projects_class = '';
-		$ready_projects_url   = add_query_arg(
-			array( 'post_type' => $plugin->projects->key, 'stage' => 'ready' ),
+		$projects       = new \WP_Query( $args );
+		$projects_count = count( $projects->posts );
+		$projects_class = '';
+		$projects_url   = add_query_arg(
+			array( 'post_type' => $plugin->projects->key, 'stage' => $stage ),
 			admin_url( 'edit.php' )
 		);
 
-		$stage = sanitize_key( filter_input( INPUT_GET, 'stage' ) );
-		if ( 'ready' === $stage ) {
-			$ready_projects_class = 'class="current"';
+		if ( $stage === $input ) {
+			$projects_class = 'class="current"';
 		}
 
-		$views['ready'] = sprintf(
+		return sprintf(
 			'<a %s href="%s">%s</a> (%d)',
-			$ready_projects_class,
-			$ready_projects_url,
-			__( 'Pending Approval', 'flint' ),
-			$ready_projects_count
+			$projects_class,
+			$projects_url,
+			$this->stages[ $stage ],
+			$projects_count
 		);
-
-		return $views;
 	}
 
 	/**
@@ -130,7 +149,15 @@ class Stage implements Field_Group {
 	public function filter_post_view( $query ) {
 		global $pagenow;
 
-		if( 'edit.php' !== $pagenow || ! $query->is_admin || 'stage' === $query->get( 'meta_key' ) ) {
+		if ( ! current_user_can( 'edit_others_posts' ) ) {
+			return $query;
+		}
+
+		if ( 'stage' === $query->get( 'meta_key' ) ) {
+			return $query;
+		}
+
+		if( 'edit.php' !== $pagenow || ! $query->is_admin ) {
 			return $query;
 		}
 
