@@ -28,8 +28,14 @@ class Stage implements Field_Group {
 	 */
 	public function __construct() {
 		$this->stages = array(
-			'open' => __( 'Open', 'flint' ),
-			'active' => __( 'Active', 'flint' ),
+			'open' => array(
+				'label'       => __( 'Open', 'flint' ),
+				'description' => __( 'Open Projects are still forming a team and defining a business model.', 'flint' ),
+			),
+			'active' => array(
+				'label'       => __( 'Active', 'flint' ),
+				'description' => __( 'Active Projects have been released, or are in development.', 'flint' ),
+			),
 		);
 
 		$plugin = get_plugin_instance();
@@ -37,11 +43,41 @@ class Stage implements Field_Group {
 	}
 
 	/**
+	 * Default new Projects to the 'open' Stage
+	 *
+	 * @action save_post
+	 *
+	 * @param int $post_id
+	 */
+	public function save_post( $post_id ) {
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
+		if ( current_user_can( 'administrator' ) || current_user_can( 'editor' ) ) {
+			// No need to force a save, since they already have permission to edit this field.
+			return;
+		}
+
+		$default = array_keys( $this->stages )[0];
+		$field   = acf_maybe_get_field( $this->key );
+		$value   = '';
+
+		if ( $field ) {
+			$value = $field->value;
+		}
+
+		if ( ! array_key_exists( $value, $this->stages ) ) {
+			update_field( $this->key, $default, $post_id );
+		}
+	}
+
+	/**
 	 * Print the HTML template.
 	 */
 	public function display() {
 		$stage = get_field( $this->key );
-		echo wp_kses_post( $this->stages[ $stage ] );
+		echo wp_kses_post( $this->stages[ $stage ]['label'] );
 	}
 
 	/**
@@ -70,8 +106,14 @@ class Stage implements Field_Group {
 	 * Displays a metabox containing the current Stage.
 	 */
 	public function display_meta_box() {
-		$stage = get_field( $this->key );
-		echo wp_kses_post( $this->stages[ $stage ] );
+		$value = get_field( $this->key );
+		$stage = $this->stages[ $value ];
+		echo wp_kses_post( sprintf(
+			'<h4>%s %s</h4><p class="description">%s</p>',
+			__( 'Current Stage: ', 'flint' ),
+			$stage['label'],
+			$stage['description']
+		) );
 	}
 
 	/**
@@ -83,12 +125,8 @@ class Stage implements Field_Group {
 	 * @return array
 	 */
 	public function add_post_view( $views ) {
-		if ( ! current_user_can( 'edit_others_posts' ) ) {
-			return $views;
-		}
-
-		foreach ( $this->stages as $stage => $label ) {
-			$views[] = $this->get_post_view( $stage );
+		foreach ( $this->stages as $stage => $args ) {
+			$views[] = wp_kses_post( $this->get_post_view( $stage ) );
 		}
 
 		return $views;
@@ -104,6 +142,38 @@ class Stage implements Field_Group {
 		$plugin = get_plugin_instance();
 		$input  = sanitize_key( filter_input( INPUT_GET, 'stage' ) );
 
+		$class = '';
+		$count = $this->get_post_stage_count( $stage );
+		$url   = add_query_arg(
+			array(
+				'post_type' => $plugin->projects->key,
+				'all_posts' => 1,
+				'stage' => $stage
+			),
+			admin_url( 'edit.php' )
+		);
+
+		if ( $stage === $input ) {
+			$class = 'class="current"';
+		}
+
+		return sprintf(
+			'<a %s href="%s">%s</a> (%d)',
+			$class,
+			$url,
+			$this->stages[ $stage ]['label'],
+			$count
+		);
+	}
+
+	/**
+	 * Get the total amount of Projects in the Stage
+	 *
+	 * @param string $stage
+	 * @return int
+	 */
+	public function get_post_stage_count( $stage ) {
+		$plugin = get_plugin_instance();
 		wp_reset_query();
 		/**
 		 * @see https://core.trac.wordpress.org/ticket/29178
@@ -115,27 +185,11 @@ class Stage implements Field_Group {
 			'meta_value'     => $stage,
 			'fields'         => 'ids',
 			'no_found_rows'  => true,
+			'post_status'    => 'any',
 		);
 
-		$projects       = new \WP_Query( $args );
-		$projects_count = count( $projects->posts );
-		$projects_class = '';
-		$projects_url   = add_query_arg(
-			array( 'post_type' => $plugin->projects->key, 'stage' => $stage ),
-			admin_url( 'edit.php' )
-		);
-
-		if ( $stage === $input ) {
-			$projects_class = 'class="current"';
-		}
-
-		return sprintf(
-			'<a %s href="%s">%s</a> (%d)',
-			$projects_class,
-			$projects_url,
-			$this->stages[ $stage ],
-			$projects_count
-		);
+		$projects = new \WP_Query( $args );
+		return count( $projects->posts );
 	}
 
 	/**
@@ -148,10 +202,6 @@ class Stage implements Field_Group {
 	 */
 	public function filter_post_view( $query ) {
 		global $pagenow;
-
-		if ( ! current_user_can( 'edit_others_posts' ) ) {
-			return $query;
-		}
 
 		if ( 'stage' === $query->get( 'meta_key' ) ) {
 			return $query;

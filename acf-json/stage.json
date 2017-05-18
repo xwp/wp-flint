@@ -39,7 +39,19 @@
                 "operator": "==",
                 "value": "administrator"
             }
-        ]
+        ],
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "project"
+			},
+			{
+				"param": "current_user_role",
+				"operator": "==",
+				"value": "editor"
+			}
+		]
     ],
     "menu_order": 0,
     "position": "side",
