@@ -27,7 +27,7 @@ class Shortcode {
 
 		$atts = shortcode_atts(
 			array(
-				'open' => '',
+				'stage' => '',
 				'likes' => '',
 			),
 			$atts
@@ -35,14 +35,9 @@ class Shortcode {
 
 		$args = array( 'post_type'  => array( $plugin->projects->key ) );
 
-		if ( 'true' === $atts['open'] || true === $atts['open'] ) {
-			$args['meta_key']   = 'is_open';
-			$args['meta_value'] = '1';
-		}
-
-		if ( 'false' === $atts['open'] || false === $atts['open'] ) {
-			$args['meta_key']   = 'is_open';
-			$args['meta_value'] = '0';
+		if ( ! empty( $atts['stage'] ) ) {
+			$args['meta_key']   = 'stage';
+			$args['meta_value'] = $atts['stage'];
 		}
 
 		if ( is_user_logged_in() ) {

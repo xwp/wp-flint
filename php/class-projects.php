@@ -155,38 +155,4 @@ class Projects {
 		}
 		return $defaults;
 	}
-
-	/**
-	 * Update meta to indicate open positions
-	 *
-	 * @action save_post, 20
-	 *
-	 * @param int $post_id
-	 * @param \WP_Post $post
-	 */
-	public function update_project_meta( $post_id, $post ) {
-		if ( $this->key !== $post->post_type ) {
-			return;
-		}
-
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
-
-		$is_open = false;
-
-		if ( have_rows( 'roles', $post_id ) ) {
-			while( have_rows( 'roles', $post_id ) ) {
-				the_row();
-				$user = get_sub_field( 'user' );
-				if ( ! $user ) {
-					$is_open = true;
-					break;
-				}
-			}
-			reset_rows();
-		}
-
-		update_post_meta( $post_id, 'is_open', $is_open ? '1' : '0' );
-	}
 }
