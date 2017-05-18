@@ -24,6 +24,13 @@ class Projects {
 	public $likes;
 
 	/**
+	 * Post type key.
+	 *
+	 * @var String
+	 */
+	public $key = 'project';
+
+	/**
 	 * Register post types.
 	 *
 	 * @action init
@@ -49,13 +56,13 @@ class Projects {
 			'capability_type'     => 'post',
 			'map_meta_cap'        => true,
 			'hierarchical'        => false,
-			'rewrite'             => array( 'slug' => 'project', 'with_front' => true ),
+			'rewrite'             => array( 'slug' => $this->key, 'with_front' => true ),
 			'query_var'           => true,
 			'menu_icon'           => 'dashicons-pressthis',
 			'supports'            => array( 'title', 'editor', 'comments' ),
 		);
 
-		register_post_type( 'project', $args );
+		register_post_type( $this->key, $args );
 	}
 
 	/**
@@ -67,11 +74,17 @@ class Projects {
 		$this->custom_field_groups = apply_filters( 'flint_custom_field_groups', array(
 			'business_model' => new Business_Model(),
 			'summary'        => new Summary(),
+			'stage'          => new Stage(),
 			'roles'          => new Roles(),
 			'timeline'       => new Timeline(),
 			'feature_color'  => new Feature_Color(),
 			'video_pitch'    => new Video_Pitch(),
 		) );
+
+		$plugin = get_plugin_instance();
+		foreach ( $this->custom_field_groups as $custom_field_group ) {
+			$plugin->add_doc_hooks( $custom_field_group );
+		}
 	}
 
 	/**
@@ -119,7 +132,7 @@ class Projects {
 	public function project_template( $template ) {
 		global $flint_plugin;
 
-		if ( is_singular( 'project' ) ) {
+		if ( is_singular( $this->key ) ) {
 			$template = locate_template( 'single-project.php' );
 			if ( ! $template ) {
 				$template = $flint_plugin->dir_path . '/templates/single-project.php';
@@ -137,43 +150,9 @@ class Projects {
 	 * @return array
 	 */
 	public function project_comments_template( $defaults ) {
-		if ( is_singular( 'project' ) ) {
+		if ( is_singular( $this->key ) ) {
 			$defaults['title_reply'] = __( 'Questions & Suggestions', 'flint' );
 		}
 		return $defaults;
-	}
-
-	/**
-	 * Update meta to indicate open positions
-	 *
-	 * @action save_post, 20
-	 *
-	 * @param int $post_id
-	 * @param \WP_Post $post
-	 */
-	public function update_project_meta( $post_id, $post ) {
-		if ( 'project' !== $post->post_type ) {
-			return;
-		}
-
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
-
-		$is_open = false;
-
-		if ( have_rows( 'roles', $post_id ) ) {
-			while( have_rows( 'roles', $post_id ) ) {
-				the_row();
-				$user = get_sub_field( 'user' );
-				if ( ! $user ) {
-					$is_open = true;
-					break;
-				}
-			}
-			reset_rows();
-		}
-
-		update_post_meta( $post_id, 'is_open', $is_open ? '1' : '0' );
 	}
 }
