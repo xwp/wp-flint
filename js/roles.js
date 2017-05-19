@@ -4,10 +4,10 @@
 		$( this ).next( '.row' ).submit();
 	}).hover(
 		function() {
-			$( this ).prevAll( '.avatar.empty' ).addClass( 'apply' );
+			$( this ).prevAll( '.avatar.empty' ).addClass( 'request' );
 		},
 		function() {
-			$( this ).prevAll( '.avatar.empty' ).removeClass( 'apply' );
+			$( this ).prevAll( '.avatar.empty' ).removeClass( 'request' );
 		}
 	);
 }) ( jQuery );

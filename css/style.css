@@ -64,13 +64,13 @@
 	z-index: 10;
 	background: #fff;
 }
-.roles li .avatar.empty.apply {
+.roles li .avatar.empty.request {
 	opacity: 0.1;
 }
-.roles li .avatar.empty.applied {
+.roles li .avatar.empty.requested {
 	opacity: 0.9;
 }
-.roles li .applied {
+.roles li .requested {
 	font-style: italic;
 }
 .roles li .join {
