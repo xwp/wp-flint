@@ -147,6 +147,8 @@ class Projects {
 		global $flint_plugin;
 
 		if ( is_singular( $this->key ) ) {
+			$this->enqueue_scripts();
+
 			$template = locate_template( 'single-project.php' );
 			if ( ! $template ) {
 				$template = $flint_plugin->dir_path . '/templates/single-project.php';
@@ -168,5 +170,13 @@ class Projects {
 			$defaults['title_reply'] = __( 'Questions & Suggestions', 'flint' );
 		}
 		return $defaults;
+	}
+
+	/**
+	 * Enqueue the javascript required for the Project template
+	 */
+	public function enqueue_scripts() {
+		$plugin = get_plugin_instance();
+		wp_enqueue_script( 'project', trailingslashit( $plugin->dir_url ) . 'js/project.js', array( 'jquery' ), false, true );
 	}
 }
