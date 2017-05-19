@@ -59,7 +59,7 @@ class Roles implements Field_Group {
 							<span class="avatar empty <?php echo esc_attr( $application_index  === get_row_index() ? 'applied' : '' ); ?>"></span>
 							<span class="role"><?php echo esc_html( $role ); ?></span>
 							<?php if ( $can_join ) : ?>
-								<input type="button" class="join" value="<?php esc_attr_e( 'Request to Join', 'flint' ) ?>" />
+								<input type="button" class="join" value="<?php esc_attr_e( 'Join', 'flint' ) ?>" />
 								<form method="post" id="row-<?php echo esc_attr( get_row_index() ); ?>" class="row">
 									<input type="hidden" name="request-role" value="<?php echo esc_attr( get_row_index() ); ?>" />
 								</form>

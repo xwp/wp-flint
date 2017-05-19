@@ -50,10 +50,6 @@
 	display: block;
 	margin: 0 auto;
 }
-.roles li img.avatar {
-	width: 96px;
-	height: 96px;
-}
 .roles li .avatar.empty {
 	width: 98px;
 	height: 98px;
@@ -62,10 +58,11 @@
 	border: 1px solid #ccc;
 	box-sizing: border-box;
 	position: absolute;
-	top: -1px;
+	top: 0;
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 10;
+	background: #fff;
 }
 .roles li .avatar.empty.apply {
 	opacity: 0.1;
