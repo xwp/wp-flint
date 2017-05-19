@@ -12,7 +12,7 @@ class Roles implements Field_Group {
 	/**
 	 * Handle Role requests.
 	 *
-	 * @var Request
+	 * @var Role_Request
 	 */
 	public $request;
 
@@ -20,7 +20,7 @@ class Roles implements Field_Group {
 	 * Roles constructor.
 	 */
 	public function __construct() {
-		$this->request = new Request();
+		$this->request = new Role_Request();
 	}
 
 	/**

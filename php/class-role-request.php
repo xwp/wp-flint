@@ -7,7 +7,7 @@
 
 namespace Flint;
 
-class Request {
+class Role_Request {
 
 	/**
 	 * Meta key.
