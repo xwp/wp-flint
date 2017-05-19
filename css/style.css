@@ -46,36 +46,36 @@
 	padding-top: 0.5em;
 	font-weight: bold;
 }
-.roles li .open img.avatar {
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
-	opacity: 0.8;
-	z-index: -1;
+.roles li .avatar {
+	display: block;
+	margin: 0 auto;
 }
 .roles li .avatar.empty {
-	width: 96px;
-	height: 96px;
+	width: 98px;
+	height: 98px;
 	border-radius: 50%;
 	margin: 0 auto;
 	border: 1px solid #ccc;
 	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 10;
+	background: #fff;
 }
-.roles li .open .avatar.empty:hover {
-	background: rgba(0,0,0,0);
+.roles li .avatar.empty.request {
+	opacity: 0.1;
 }
-.roles li .avatar.empty .join {
+.roles li .avatar.empty.requested {
+	opacity: 0.9;
+}
+.roles li .requested {
+	font-style: italic;
+}
+.roles li .join {
 	display: block;
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-	line-height: 96px;
-	font-weight: bold;
-	color: #444;
-	text-shadow: none;
-}
-.roles li .avatar.empty:hover .join {
-	color: #fff;
+	margin: 0.5em auto;
 }
 .projects-archive .project .roles {
 	position: absolute;

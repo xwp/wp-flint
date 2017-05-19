@@ -59,7 +59,7 @@ class Projects {
 			'rewrite'             => array( 'slug' => $this->key, 'with_front' => true ),
 			'query_var'           => true,
 			'menu_icon'           => 'dashicons-pressthis',
-			'supports'            => array( 'title', 'editor', 'comments' ),
+			'supports'            => array( 'title', 'editor', 'comments', 'author' ),
 		);
 
 		register_post_type( $this->key, $args );
@@ -97,8 +97,22 @@ class Projects {
 	 */
 	public function load_custom_field_json( $paths ) {
 		$plugin = get_plugin_instance();
-		$paths[] = $plugin->dir_path . '/acf-json';
+		$paths[] = trailingslashit( $plugin->dir_path ) . 'acf-json';
 		return $paths;
+	}
+
+	/**
+	 * Custom Field Group Rows should start at 0.
+	 *
+	 * @see https://www.advancedcustomfields.com/resources/get_row_index/
+	 *
+	 * @filter acf/settings/row_index_offset
+	 *
+	 * @param $row_index_offset
+	 * @return int
+	 */
+	function row_index_offset_setting( $row_index_offset ) {
+		return 0;
 	}
 
 	/**
