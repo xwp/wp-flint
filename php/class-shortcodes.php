@@ -14,6 +14,7 @@ class Shortcodes {
 	 */
 	public function __construct() {
 		add_shortcode( 'projects', array( $this, 'display_projects' ) );
+		add_shortcode( 'updates', array( $this, 'display_updates' ) );
 	}
 
 	/**
@@ -73,6 +74,71 @@ class Shortcodes {
 						<?php $plugin->projects->display_field( 'roles' ); ?>
 					</article>
 					<?php
+				}
+				wp_reset_postdata();
+				?>
+			</section>
+			<?php
+		}
+
+		return ob_get_clean();
+	}
+
+	/**
+	 * Print HTML template for Updates
+	 *
+	 * @param array $atts
+	 * @return string
+	 */
+	public function display_updates( $atts ) {
+		$plugin = get_plugin_instance();
+
+		$atts = shortcode_atts(
+			array(
+				'likes' => '',
+			),
+			$atts
+		);
+
+		$args = array( 'post_type'  => array( $plugin->projects->updates->key ) );
+
+		if ( is_user_logged_in() && '' !== $atts['likes'] ) {
+			$meta_key = $plugin->projects->likes->meta_key;
+			$likes    = get_user_meta( get_current_user_id(), $meta_key, true );
+			$projects = get_posts( array( 'post_type' => $plugin->projects->key, 'include' => $likes ) );
+			$terms    = array();
+
+			/**
+			 * @var $project \WP_Post
+			 */
+			foreach ( $projects as $project ) {
+				$terms[] = $project->post_name;
+			}
+
+			$args['tax_query'] = array(
+				array(
+					'taxonomy' => $plugin->projects->updates->tax_key,
+					'field'    => 'slug',
+					'terms'    => $terms,
+				),
+			);
+
+			if ( 'false' === $atts['likes'] || false === $atts['likes'] ) {
+				$args['tax_query'][0]['operator'] = 'NOT IN';
+			}
+		}
+
+		$query = new \WP_Query( $args );
+
+		ob_start();
+
+		if ( $query->have_posts() ) {
+			?>
+			<section class="projects-updates">
+				<?php
+				while ( $query->have_posts() ) {
+					$query->the_post();
+					load_template( trailingslashit( $plugin->dir_path ) . 'templates/project-update.php' );
 				}
 				wp_reset_postdata();
 				?>
