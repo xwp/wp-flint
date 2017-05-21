@@ -24,6 +24,13 @@ class Projects {
 	public $likes;
 
 	/**
+	 * Updates.
+	 *
+	 * @var Updates
+	 */
+	public $updates;
+
+	/**
 	 * Post type key.
 	 *
 	 * @var String
@@ -31,11 +38,11 @@ class Projects {
 	public $key = 'project';
 
 	/**
-	 * Register post types.
+	 * Register post type.
 	 *
 	 * @action init
 	 */
-	public function register_post_types() {
+	public function register_post_type() {
 		$labels = array(
 			'name'          => __( 'Projects', 'flint' ),
 			'singular_name' => __( 'Project', 'flint' ),
@@ -58,6 +65,7 @@ class Projects {
 			'hierarchical'        => false,
 			'rewrite'             => array( 'slug' => $this->key, 'with_front' => true ),
 			'query_var'           => true,
+			'menu_position'       => 4,
 			'menu_icon'           => 'dashicons-pressthis',
 			'supports'            => array( 'title', 'editor', 'comments', 'author' ),
 		);
@@ -125,6 +133,17 @@ class Projects {
 	}
 
 	/**
+	 * Register updates.
+	 *
+	 * @action init, 1
+	 */
+	public function register_updates() {
+		$this->updates = new Updates();
+		$plugin = get_plugin_instance();
+		$plugin->add_doc_hooks( $this->updates );
+	}
+
+	/**
 	 * Print HTML template of custom field group
 	 *
 	 * @param string $field
@@ -158,7 +177,7 @@ class Projects {
 	}
 
 	/**
-	 * Change the Comments are title.
+	 * Change the Comments form title.
 	 *
 	 * @filter comment_form_defaults
 	 *
