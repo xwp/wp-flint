@@ -145,7 +145,7 @@ class Updates {
 			)
 		);
 
-		if ( ! is_wp_error( $term ) || ! isset( $term['term_id'] ) ) {
+		if ( is_wp_error( $term ) || ! isset( $term['term_id'] ) ) {
 			return;
 		}
 
