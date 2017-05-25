@@ -132,19 +132,19 @@ class Shortcodes {
 
 		ob_start();
 
+		echo '<section class="projects-updates">';
+
 		if ( $query->have_posts() ) {
-			?>
-			<section class="projects-updates">
-				<?php
-				while ( $query->have_posts() ) {
-					$query->the_post();
-					load_template( trailingslashit( $plugin->dir_path ) . 'templates/project-update.php' );
-				}
-				wp_reset_postdata();
-				?>
-			</section>
-			<?php
+			while ( $query->have_posts() ) {
+				$query->the_post();
+				load_template( trailingslashit( $plugin->dir_path ) . 'templates/project-update.php' );
+			}
+			wp_reset_postdata();
+		} else {
+			printf( '<p>%s</p>', __( 'Nothing Found.', 'flint' ) );
 		}
+
+		echo '</section>';
 
 		return ob_get_clean();
 	}
