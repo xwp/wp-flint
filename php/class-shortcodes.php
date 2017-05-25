@@ -141,7 +141,7 @@ class Shortcodes {
 			}
 			wp_reset_postdata();
 		} else {
-			printf( '<p>%s</p>', __( 'Nothing Found.', 'flint' ) );
+			printf( '<p>%s</p>', __( 'Nothing found.', 'flint' ) );
 		}
 
 		echo '</section>';
