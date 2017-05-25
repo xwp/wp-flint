@@ -125,7 +125,12 @@ class Updates {
 			return;
 		}
 
-		$post = get_post( $post_id );
+		$post   = get_post( $post_id );
+		$plugin = get_plugin_instance();
+
+		if ( $plugin->projects->key !== $post->post_type ) {
+			return;
+		}
 
 		if ( 'publish' !== get_post_status( $post ) || empty( $post->post_name ) ) {
 			return;
