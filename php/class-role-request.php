@@ -29,8 +29,10 @@ class Role_Request {
 				$title = $role['role_title'];
 			}
 
+			global $post;
+
 			$this->email_new_request( $title );
-			$this->update_request_user_meta( $row );
+			$this->update_request_user_meta( $row, $post->ID );
 		}
 	}
 
@@ -80,43 +82,44 @@ class Role_Request {
 	/**
 	 * Update user meta to include Role request
 	 *
-	 * @param int $index
+	 * @param int $index Role index
+	 * @param int $project_id
 	 */
-	public function update_request_user_meta( $index ) {
-		global $post;
+	public function update_request_user_meta( $index, $project_id ) {
 		$user = wp_get_current_user();
 		$requests = get_user_meta( $user->ID, $this->meta_key, true );
-		$requests[ $post->ID ] = $index;
+		$requests[ $project_id ] = $index;
 		update_user_meta( $user->ID, $this->meta_key, $requests );
 	}
 
 	/**
 	 * Remove Role request from user meta
+	 *
+	 * @param int $project_id
 	 */
-	public function remove_request_user_meta() {
-		global $post;
+	public function remove_request_user_meta( $project_id ) {
 		$user = wp_get_current_user();
 		$requests = get_user_meta( $user->ID, $this->meta_key, true );
-		unset( $requests[ $post->ID ] );
+		unset( $requests[ $project_id ] );
 		update_user_meta( $user->ID, $this->meta_key, $requests );
 	}
 
 	/**
 	 * Returns the current user's requested Role index, or false if none
 	 *
+	 * @param int $project_id
 	 * @return int|bool
 	 */
-	public function get_request_index() {
-		global $post;
+	public function get_request_index( $project_id ) {
 		$user = wp_get_current_user();
 
 		$requests = get_user_meta( $user->ID, $this->meta_key, true );
 
-		if ( is_array( $requests ) && array_key_exists( $post->ID, $requests ) ) {
-			$index  = $requests[ $post->ID ];
+		if ( is_array( $requests ) && array_key_exists( $project_id, $requests ) ) {
+			$index  = $requests[ $project_id ];
 			$filled = $role = get_field( 'roles' )[ $index ];
 			if ( $filled['user'] ) {
-				$this->remove_request_user_meta();
+				$this->remove_request_user_meta( $project_id );
 				return false;
 			} else {
 				return $index;

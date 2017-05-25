@@ -5,7 +5,7 @@
  * @package Flint
  */
 
-global $flint_plugin;
+global $flint_plugin, $post;
 
 get_header(); ?>
 
@@ -22,58 +22,47 @@ get_header(); ?>
 					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
 				</header>
 
-				<div class="entry-content container">
-					<?php $flint_plugin->projects->display_field( 'video_pitch' ); ?>
-				</div>
+				<nav class="tabs">
+					<ul>
+						<li class="current"><a href="#details"><?php esc_html_e( 'Project Description', 'flint' ); ?></a></li>
+						<li><a href="#updates"><?php esc_html_e( 'Updates', 'flint' ); ?></a></li>
+						<li><a href="#discussion"><?php esc_html_e( 'Discussion', 'flint' ); ?></a></li>
+					</ul>
+				</nav>
 
-				<div class="entry-content container">
-					<h2><?php _e( 'Overview', 'flint' ); ?></h2>
-					<?php the_content(); ?>
-				</div>
+				<section id="details" class="tab-content current">
+					<?php load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-details.php' ); ?>
+				</section>
 
-				<div class="entry-content role-descriptions container">
-					<h2><?php _e( 'Team Roles', 'flint' ); ?></h2>
+				<section id="updates" class="tab-content">
 					<?php
-					while( have_rows( 'roles' ) ) {
-						the_row();
-						$role = get_sub_field( 'role' );
-						if ( 'Other' === $role ) {
-							$role = get_sub_field( 'role_title' );
-						}
-						echo '<h3>' . esc_html( $role ) . '</h3>';
-						echo wp_kses_post( get_sub_field( 'role_description' ) );
-					}
-					reset_rows();
-					?>
-				</div>
-
-				<div class="entry-content business-model container">
-					<?php $flint_plugin->projects->display_field( 'business_model' ); ?>
-				</div>
-
-				<div class="entry-content timeline container">
-					<?php $flint_plugin->projects->display_field( 'timeline' ); ?>
-				</div>
-
-				<footer class="entry-footer">
-					<?php
-					edit_post_link(
-						sprintf(
-							__( 'Edit<span class="screen-reader-text"> "%s"</span>', 'flint' ),
-							get_the_title()
+					$args = array(
+						'tax_query' => array(
+							array(
+								'taxonomy' => $flint_plugin->projects->updates->tax_key,
+								'field'    => 'slug',
+								'terms'    => $post->post_name,
+							),
 						),
-						'<span class="edit-link">',
-						'</span>'
 					);
+					$query = new \WP_Query( $args );
+					if ( $query->have_posts() ) :
+						while ( $query->have_posts() ) :
+							$query->the_post();
+							load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-update.php' );
+						endwhile;
+					endif;
 					?>
-				</footer>
+				</section>
+
+				<?php if ( comments_open() || get_comments_number() ) : ?>
+				<section id="discussion" class="tab-content">
+					<?php comments_template(); ?>
+				</section>
+				<?php endif; ?>
+
 			</article>
 			<?php
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) {
-				comments_template();
-			}
 			// End of the loop.
 		endwhile;
 		?>

@@ -27,14 +27,16 @@ class Roles implements Field_Group {
 	 * Print the HTML template.
 	 */
 	public function display() {
+		global $post;
+
 		$this->request->maybe_request();
 		$this->enqueue_scripts();
 
 		if ( have_rows( 'roles' ) ) {
 			echo '<ul class="roles">';
 			$can_join = is_user_logged_in() && is_single();
-			$role_index = $this->get_role_index();
-			$request_index = $this->request->get_request_index();
+			$role_index = $this->get_role_index( $post->ID );
+			$request_index = $this->request->get_request_index( $post->ID );
 
 			// Check if current user has a current request.
 			if ( $can_join && false !== $request_index ) {
@@ -98,14 +100,15 @@ class Roles implements Field_Group {
 	/**
 	 * Return's the current user's Role index in the Team, or false if none
 	 *
+	 * @param int $project_id
 	 * @return int|bool
 	 */
-	public function get_role_index() {
+	public function get_role_index( $project_id ) {
 		$current_user = wp_get_current_user();
 		$index = false;
 
-		if ( have_rows( 'roles' ) ) {
-			while( have_rows( 'roles' ) ) {
+		if ( have_rows( 'roles', $project_id ) ) {
+			while( have_rows( 'roles', $project_id ) ) {
 				the_row();
 				$user = get_sub_field( 'user' );
 				if ( $user && $current_user->ID === $user['ID'] ) {

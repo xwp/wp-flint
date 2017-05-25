@@ -1,5 +1,4 @@
 ( function( $ ) {
-	// your code
 	$( '.roles .join' ).click( function() {
 		$( this ).next( '.row' ).submit();
 	}).hover(

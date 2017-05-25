@@ -20,11 +20,11 @@ class Plugin extends Plugin_Base {
 	public $projects;
 
 	/**
-	 * Shortcode.
+	 * Shortcodes.
 	 *
-	 * @var Shortcode
+	 * @var Shortcodes
 	 */
-	public $shortcode;
+	public $shortcodes;
 
 	/**
 	 * Initiate the plugin resources.
@@ -42,8 +42,8 @@ class Plugin extends Plugin_Base {
 			$this->projects = new Projects();
 			$this->add_doc_hooks( $this->projects );
 
-			$this->shortcode = new Shortcode();
-			$this->add_doc_hooks( $this->shortcode );
+			$this->shortcodes = new Shortcodes();
+			$this->add_doc_hooks( $this->shortcodes );
 		} else {
 			$this->acf_inactive_error();
 		}
