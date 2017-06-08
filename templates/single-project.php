@@ -18,8 +18,14 @@ get_header(); ?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<header class="entry-header">
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-					<?php the_field( 'tweet_pitch' ); ?>
-					<?php $flint_plugin->projects->display_field( 'roles' ); ?>
+					<?php
+					if ( $flint_plugin->projects->field_is_valid( 'summary' ) ) {
+						$flint_plugin->projects->display_field( 'summary' );
+					};
+					if ( $flint_plugin->projects->field_is_valid( 'roles' ) ) {
+						$flint_plugin->projects->display_field( 'roles' );
+					};
+					?>
 				</header>
 
 				<nav class="tabs">

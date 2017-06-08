@@ -9,6 +9,30 @@ namespace Flint;
 
 class Business_Model implements Field_Group {
 	/**
+	 * Check if the field contains a valid value.
+	 *
+	 * @return bool
+	 */
+	public function is_valid() {
+		if ( empty( get_field( 'delivery_activities' ) ) ) {
+			return false;
+		}
+		if ( empty( get_field( 'value_proposition' ) ) ) {
+			return false;
+		}
+		if ( empty( get_field( 'customer_profile' ) ) ) {
+			return false;
+		}
+		if ( empty( get_field( 'cost_structure' ) ) ) {
+			return false;
+		}
+		if ( empty( get_field( 'revenue_streams' ) ) ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Print the HTML template.
 	 */
 	public function display() {

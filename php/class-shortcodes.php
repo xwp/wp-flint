@@ -65,13 +65,28 @@ class Shortcodes {
 					$query->the_post();
 					?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-						<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="color: ' . get_field( 'feature_color' ) . '">', '</h1>' ); ?></a>
+						<?php
+						if ( $plugin->projects->field_is_valid( 'feature_color' ) ) {
+							$color = get_field( 'feature_color' );
+						} else {
+							$color = 'inherit';
+						};
+						?>
+						<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="color: ' . esc_attr( $color ) . '">', '</h1>' ); ?></a>
 						<?php $plugin->projects->likes->display(); ?>
 						<div class="description">
-							<?php the_field( 'tweet_pitch' ); ?>
+							<?php
+							if ( $plugin->projects->field_is_valid( 'summary' ) ) {
+								$plugin->projects->display_field( 'summary' );
+							};
+							?>
 							<p><a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a></p>
 						</div>
-						<?php $plugin->projects->display_field( 'roles' ); ?>
+						<?php
+						if ( $plugin->projects->field_is_valid( 'roles' ) ) {
+							$plugin->projects->display_field( 'roles' );
+						};
+						?>
 					</article>
 					<?php
 				}

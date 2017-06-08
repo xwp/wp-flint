@@ -9,6 +9,18 @@ namespace Flint;
 
 class Timeline implements Field_Group {
 	/**
+	 * Check if the field contains a valid value.
+	 *
+	 * @return bool
+	 */
+	public function is_valid() {
+		if ( ! have_rows( 'key_dates' ) ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Print the HTML template.
 	 */
 	public function display() {
