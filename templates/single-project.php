@@ -31,7 +31,7 @@ get_header(); ?>
 				</nav>
 
 				<section id="details" class="tab-content current">
-					<?php load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-details.php' ); ?>
+					<?php load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-details.php', false ); ?>
 				</section>
 
 				<section id="updates" class="tab-content">
@@ -49,7 +49,7 @@ get_header(); ?>
 					if ( $query->have_posts() ) :
 						while ( $query->have_posts() ) :
 							$query->the_post();
-							load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-update.php' );
+							load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-update.php', false );
 						endwhile;
 					endif;
 					?>

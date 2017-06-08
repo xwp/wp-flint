@@ -137,7 +137,7 @@ class Shortcodes {
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
 				$query->the_post();
-				load_template( trailingslashit( $plugin->dir_path ) . 'templates/project-update.php' );
+				load_template( trailingslashit( $plugin->dir_path ) . 'templates/project-update.php', false );
 			}
 			wp_reset_postdata();
 		} else {
