@@ -73,6 +73,20 @@ class Stage implements Field_Group {
 	}
 
 	/**
+	 * Check if the field contains a valid value.
+	 *
+	 * @return bool
+	 */
+	public function is_valid() {
+		$value  = get_field( $this->key );
+		$stages = array_keys( $this->stages );
+		if ( empty( $value ) || ! in_array( $value, $stages ) ) {
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * Print the HTML template.
 	 */
 	public function display() {

@@ -144,6 +144,20 @@ class Projects {
 	}
 
 	/**
+	 * Checks whether the custom field group has valid content
+	 *
+	 * @param string $field
+	 * @return bool
+	 */
+	public function field_is_valid( $field ) {
+		if ( isset( $this->custom_field_groups[ $field ] ) ) {
+			return $this->custom_field_groups[ $field ]->is_valid();
+		}
+
+		return false;
+	}
+
+	/**
 	 * Print HTML template of custom field group
 	 *
 	 * @param string $field
