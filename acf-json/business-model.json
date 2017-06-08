@@ -36,8 +36,8 @@
             },
             "default_value": "",
             "placeholder": "",
-            "maxlength": 4,
-            "rows": "",
+            "maxlength": "",
+            "rows": 4,
             "new_lines": "wpautop"
         },
         {
