@@ -28,10 +28,24 @@ get_header(); ?>
 					?>
 				</header>
 
+				<?php
+				$updates_args = array(
+					'tax_query' => array(
+						array(
+							'taxonomy' => $flint_plugin->projects->updates->tax_key,
+							'field'    => 'slug',
+							'terms'    => $post->post_name,
+						),
+					),
+				);
+				$updates_query = new \WP_Query( $updates_args );
+				?>
 				<nav class="tabs">
 					<ul>
 						<li class="current"><a href="#details"><?php esc_html_e( 'Project Description', 'flint' ); ?></a></li>
+						<?php if ( $updates_query->have_posts() ) : ?>
 						<li><a href="#updates"><?php esc_html_e( 'Updates', 'flint' ); ?></a></li>
+						<?php endif; ?>
 						<li><a href="#discussion"><?php esc_html_e( 'Discussion', 'flint' ); ?></a></li>
 					</ul>
 				</nav>
@@ -40,26 +54,16 @@ get_header(); ?>
 					<?php load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-details.php', false ); ?>
 				</section>
 
-				<section id="updates" class="tab-content">
-					<?php
-					$args = array(
-						'tax_query' => array(
-							array(
-								'taxonomy' => $flint_plugin->projects->updates->tax_key,
-								'field'    => 'slug',
-								'terms'    => $post->post_name,
-							),
-						),
-					);
-					$query = new \WP_Query( $args );
-					if ( $query->have_posts() ) :
-						while ( $query->have_posts() ) :
-							$query->the_post();
-							load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-update.php', false );
-						endwhile;
-					endif;
-					?>
-				</section>
+				<?php
+				if ( $updates_query->have_posts() ) :
+					echo '<section id="updates" class="tab-content">';
+					while ( $updates_query->have_posts() ) :
+						$updates_query->the_post();
+						load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-update.php', false );
+					endwhile;
+					echo '</section>';
+				endif;
+				?>
 
 				<?php if ( comments_open() || get_comments_number() ) : ?>
 				<section id="discussion" class="tab-content">
