@@ -30,6 +30,7 @@ class Shortcodes {
 			array(
 				'stage' => '',
 				'likes' => '',
+				'error' => __( 'Nothing found.', 'flint' ),
 			),
 			$atts
 		);
@@ -44,6 +45,10 @@ class Shortcodes {
 		if ( is_user_logged_in() ) {
 			$meta_key = $plugin->projects->likes->meta_key;
 			$likes = get_user_meta( get_current_user_id(), $meta_key, true );
+
+			if ( empty( $likes ) ) {
+				$likes = array( '-1' ); // Force no results
+			}
 
 			if ( 'true' === $atts['likes'] || true === $atts['likes'] ) {
 				$args['post__in'] = $likes;
@@ -94,6 +99,8 @@ class Shortcodes {
 				?>
 			</section>
 			<?php
+		} else {
+			echo wp_kses_post( sprintf( '<p>%s</p>', $atts['error'] ) );
 		}
 
 		return ob_get_clean();
@@ -111,6 +118,7 @@ class Shortcodes {
 		$atts = shortcode_atts(
 			array(
 				'likes' => '',
+				'error' => __( 'Nothing found.', 'flint' ),
 			),
 			$atts
 		);
@@ -156,7 +164,7 @@ class Shortcodes {
 			}
 			wp_reset_postdata();
 		} else {
-			printf( '<p>%s</p>', __( 'Nothing found.', 'flint' ) );
+			echo wp_kses_post( sprintf( '<p>%s</p>', $atts['error'] ) );
 		}
 
 		echo '</section>';
