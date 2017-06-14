@@ -61,6 +61,7 @@ get_header(); ?>
 						$updates_query->the_post();
 						load_template( trailingslashit( $flint_plugin->dir_path ) . 'templates/project-update.php', false );
 					endwhile;
+					wp_reset_query();
 					echo '</section>';
 				endif;
 				?>
