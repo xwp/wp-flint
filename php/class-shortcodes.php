@@ -95,7 +95,7 @@ class Shortcodes {
 								background-color: <?php echo esc_attr( $color ); ?>;
 							}
 						</style>
-						<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title">', '</h1>' ); ?></a>
+						<?php the_title( '<h1 class="entry-title"><a href="' . get_permalink() . '">', '</a></h1>' ); ?>
 						<?php $plugin->projects->likes->display(); ?>
 						<div class="description">
 							<?php
