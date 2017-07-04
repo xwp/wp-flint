@@ -68,16 +68,34 @@ class Shortcodes {
 				<?php
 				while ( $query->have_posts() ) {
 					$query->the_post();
+					if ( $plugin->projects->field_is_valid( 'feature_color' ) ) {
+						$color = get_field( 'feature_color' );
+					} else {
+						$color = 'inherit';
+					};
 					?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-						<?php
-						if ( $plugin->projects->field_is_valid( 'feature_color' ) ) {
-							$color = get_field( 'feature_color' );
-						} else {
-							$color = 'inherit';
-						};
-						?>
-						<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title" style="color: ' . esc_attr( $color ) . '">', '</h1>' ); ?></a>
+						<style type="text/css">
+							#post-<?php the_ID(); ?> {
+								background-color: <?php echo esc_attr( $color ); ?>;
+							}
+							#post-<?php the_ID(); ?> .learn-more-link {
+								color: <?php echo esc_attr( $color ); ?>;
+								border-color: <?php echo esc_attr( $color ); ?>;
+							}
+							#post-<?php the_ID(); ?> .learn-more-link {
+								color: <?php echo esc_attr( $color ); ?>;
+								border-color: <?php echo esc_attr( $color ); ?>;
+							}
+							#post-<?php the_ID(); ?> .learn-more-link:hover {
+								background-color: <?php echo esc_attr( $color ); ?>;
+								color: #fff;
+							}
+							#post-<?php the_ID(); ?> .avatar.empty {
+								background-color: <?php echo esc_attr( $color ); ?>;
+							}
+						</style>
+						<a href="<?php the_permalink(); ?>"><?php the_title( '<h1 class="entry-title">', '</h1>' ); ?></a>
 						<?php $plugin->projects->likes->display(); ?>
 						<div class="description">
 							<?php
@@ -87,11 +105,13 @@ class Shortcodes {
 							?>
 							<p><a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a></p>
 						</div>
+						<div class="actions">
 						<?php
 						if ( $plugin->projects->field_is_valid( 'roles' ) ) {
 							$plugin->projects->display_field( 'roles' );
 						};
 						?>
+						</div>
 					</article>
 					<?php
 				}
