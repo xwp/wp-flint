@@ -55,7 +55,7 @@ class Plugin extends Plugin_Base {
 	 * @action wp_enqueue_scripts
 	 */
 	public function register_styles() {
-		wp_enqueue_style( 'flint', trailingslashit( $this->dir_url ) . 'css/style.css' );
+		wp_enqueue_style( 'flint', trailingslashit( $this->dir_url ) . 'css/style.css', array(), trailingslashit( $this->dir_url ) . 'css/style.css', false );
 	}
 
 	/**
