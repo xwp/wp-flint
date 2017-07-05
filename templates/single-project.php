@@ -22,11 +22,25 @@ get_header(); ?>
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<style type="text/css">
+					#post-<?php the_ID(); ?> .entry-content a {
+						color: <?php echo esc_attr( $color ); ?>;
+						text-decoration: none;
+					}
+					#post-<?php the_ID(); ?> .entry-content a:hover {
+						color: <?php echo esc_attr( $color ); ?>;
+						text-decoration: underline;
+					}
+					#post-<?php the_ID(); ?> blockquote {
+						border-color: <?php echo esc_attr( $color ); ?>;
+					}
 					#post-<?php the_ID(); ?> .entry-title {
 						color: <?php echo esc_attr( $color ); ?>;
 					}
 					#post-<?php the_ID(); ?> .roles li {
 						background-color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .timeline li:hover .date {
+						color: <?php echo esc_attr( $color ); ?>;
 					}
 					#post-<?php the_ID(); ?> .tabs li.current {
 						border-bottom-color: <?php echo esc_attr( $color ); ?>;

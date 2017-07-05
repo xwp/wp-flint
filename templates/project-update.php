@@ -1,5 +1,6 @@
 <div class="entry-content container">
 	<?php the_title( '<h2>', '</h2>' ); ?>
+	<div class="meta">
 	<?php
 	printf( '<span class="byline"><span class="author vcard">%1$s<span class="screen-reader-text">%2$s </span> <a class="url fn n" href="%3$s">%4$s</a></span></span>',
 		get_avatar( get_the_author_meta( 'user_email' ), 32 ),
@@ -21,9 +22,12 @@
 		esc_url( get_permalink() ),
 		$time_string
 	);
+	?>
+	</div>
 
-	the_content();
+	<?php the_content(); ?>
 
+	<?php
 	edit_post_link(
 		sprintf(
 		/* translators: %s: Name of current post */
