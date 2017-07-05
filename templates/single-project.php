@@ -22,11 +22,13 @@ get_header(); ?>
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 				<style type="text/css">
-					#post-<?php the_ID(); ?> .entry-content a {
+					#post-<?php the_ID(); ?> .entry-content a,
+					#post-<?php the_ID(); ?> .comments-area a {
 						color: <?php echo esc_attr( $color ); ?>;
 						text-decoration: none;
 					}
-					#post-<?php the_ID(); ?> .entry-content a:hover {
+					#post-<?php the_ID(); ?> .entry-content a:hover,
+					#post-<?php the_ID(); ?> .comments-area a:hover {
 						color: <?php echo esc_attr( $color ); ?>;
 						text-decoration: underline;
 					}
@@ -48,6 +50,16 @@ get_header(); ?>
 					#post-<?php the_ID(); ?> .tabs li.current a,
 					#post-<?php the_ID(); ?> .tabs li:hover a {
 						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> #discussion .comments-area .reply a,
+					#post-<?php the_ID(); ?> #discussion .comments-area input[type="submit"] {
+						border: 1px solid <?php echo esc_attr( $color ); ?>;
+						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> #discussion .comments-area .reply a:hover,
+					#post-<?php the_ID(); ?> #discussion .comments-area input[type="submit"]:hover {
+						color: #ffffff;
+						background-color: <?php echo esc_attr( $color ); ?>;
 					}
 				</style>
 				<header class="entry-header">
