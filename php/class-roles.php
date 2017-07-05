@@ -73,21 +73,24 @@ class Roles implements Field_Group {
 					?>
 					<?php if ( $user ) : ?>
 						<div class="closed">
-							<?php echo wp_kses_post( $user['user_avatar'] ); ?>
+							<?php echo wp_kses_post( get_avatar( $user['ID'], 512 ) ); ?>
+							<span class="role"><?php echo esc_html( $role ); ?></span>
+							<span class="name"><?php echo esc_html( $user['display_name'] ); ?></span>
+						</div>
+					<?php elseif ( ! $can_join ) : ?>
+						<div class="waiting">
 							<span class="role"><?php echo esc_html( $role ); ?></span>
 							<span class="name"><?php echo esc_html( $user['display_name'] ); ?></span>
 						</div>
 					<?php else : ?>
 						<div class="open">
-							<?php echo wp_kses_post( get_avatar( get_current_user_id() ) ); ?>
+							<?php echo wp_kses_post( get_avatar( get_current_user_id(), 512 ) ); ?>
 							<span class="avatar empty <?php echo esc_attr( $request_index  === get_row_index() ? 'requested' : '' ); ?>"></span>
 							<span class="role"><?php echo esc_html( $role ); ?></span>
-							<?php if ( $can_join ) : ?>
-								<input type="button" class="join" value="<?php esc_attr_e( 'Join', 'flint' ) ?>" />
-								<form method="post" id="row-<?php echo esc_attr( get_row_index() ); ?>" class="row">
-									<input type="hidden" name="request-role" value="<?php echo esc_attr( get_row_index() ); ?>" />
-								</form>
-							<?php endif; ?>
+							<input type="button" class="join" value="<?php esc_attr_e( 'Join the Team', 'flint' ) ?>" />
+							<form method="post" id="row-<?php echo esc_attr( get_row_index() ); ?>" class="row">
+								<input type="hidden" name="request-role" value="<?php echo esc_attr( get_row_index() ); ?>" />
+							</form>
 							<?php if ( $request_index === get_row_index() ) : ?>
 								<span class="requested"><?php esc_html_e( 'Requested' ); ?></span>
 							<?php endif; ?>

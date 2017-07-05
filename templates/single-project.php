@@ -9,13 +9,26 @@ global $flint_plugin, $post;
 
 get_header(); ?>
 
-<div id="primary" class="content-area">
+<div id="primary" class="content-area container">
 	<main id="main" class="site-main" role="main">
 		<?php
 		// Start the loop.
 		while ( have_posts() ) : the_post();
+			if ( $flint_plugin->projects->field_is_valid( 'feature_color' ) ) {
+				$color = get_field( 'feature_color' );
+			} else {
+				$color = 'inherit';
+			};
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<style type="text/css">
+					#post-<?php the_ID(); ?> .entry-title {
+						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .roles li {
+						background-color: <?php echo esc_attr( $color ); ?>;
+					}
+				</style>
 				<header class="entry-header">
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<?php
