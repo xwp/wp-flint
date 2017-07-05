@@ -28,6 +28,13 @@ get_header(); ?>
 					#post-<?php the_ID(); ?> .roles li {
 						background-color: <?php echo esc_attr( $color ); ?>;
 					}
+					#post-<?php the_ID(); ?> .tabs li.current {
+						border-bottom-color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .tabs li.current a,
+					#post-<?php the_ID(); ?> .tabs li:hover a {
+						color: <?php echo esc_attr( $color ); ?>;
+					}
 				</style>
 				<header class="entry-header">
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
@@ -55,11 +62,11 @@ get_header(); ?>
 				?>
 				<nav class="tabs">
 					<ul>
-						<li class="current"><a href="#details"><?php esc_html_e( 'Project Description', 'flint' ); ?></a></li>
+						<li class="details current"><a href="#details"><?php esc_html_e( 'Details', 'flint' ); ?></a></li>
 						<?php if ( $updates_query->have_posts() ) : ?>
-						<li><a href="#updates"><?php esc_html_e( 'Updates', 'flint' ); ?></a></li>
+						<li class="updates"><a href="#updates"><?php esc_html_e( 'Updates', 'flint' ); ?></a></li>
 						<?php endif; ?>
-						<li><a href="#discussion"><?php esc_html_e( 'Discussion', 'flint' ); ?></a></li>
+						<li class="discussion"><a href="#discussion"><?php esc_html_e( 'Discussion', 'flint' ); ?></a></li>
 					</ul>
 				</nav>
 

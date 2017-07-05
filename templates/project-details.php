@@ -1,12 +1,12 @@
 <?php global $flint_plugin; ?>
 
 <?php if ( $flint_plugin->projects->field_is_valid( 'video_pitch' ) ) : ?>
-	<div class="entry-content container">
+	<div class="entry-content container video-pitch">
 		<?php $flint_plugin->projects->display_field( 'video_pitch' ); ?>
 	</div>
 <?php endif; ?>
 
-<div class="entry-content container">
+<div class="entry-content container overview">
 	<h2><?php esc_html_e( 'Overview', 'flint' ); ?></h2>
 	<?php the_content(); ?>
 </div>
