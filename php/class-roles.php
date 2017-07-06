@@ -80,7 +80,6 @@ class Roles implements Field_Group {
 					<?php elseif ( ! $can_join ) : ?>
 						<div class="waiting">
 							<span class="role"><?php echo esc_html( $role ); ?></span>
-							<span class="name"><?php echo esc_html( $user['display_name'] ); ?></span>
 						</div>
 					<?php else : ?>
 						<div class="open">

@@ -31,7 +31,7 @@ if ( $flint_plugin->projects->field_is_valid( 'feature_color' ) ) {
 			background-color: <?php echo esc_attr( $color ); ?>;
 			color: #fff;
 		}
-		#post-<?php the_ID(); ?> .avatar.empty {
+		#post-<?php the_ID(); ?> .roles .waiting {
 			background-color: <?php echo esc_attr( $color ); ?>;
 		}
 	</style>
