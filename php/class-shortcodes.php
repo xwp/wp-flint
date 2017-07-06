@@ -64,7 +64,7 @@ class Shortcodes {
 
 		if ( $query->have_posts() ) {
 			?>
-			<section class="projects-archive">
+			<section class="project-archive">
 				<?php
 				while ( $query->have_posts() ) {
 					$query->the_post();
@@ -130,7 +130,7 @@ class Shortcodes {
 
 		ob_start();
 
-		echo '<section class="projects-updates">';
+		echo '<section class="project-updates">';
 
 		if ( $query->have_posts() ) {
 			while ( $query->have_posts() ) {
