@@ -68,52 +68,7 @@ class Shortcodes {
 				<?php
 				while ( $query->have_posts() ) {
 					$query->the_post();
-					if ( $plugin->projects->field_is_valid( 'feature_color' ) ) {
-						$color = get_field( 'feature_color' );
-					} else {
-						$color = 'inherit';
-					};
-					?>
-					<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
-						<style type="text/css">
-							#post-<?php the_ID(); ?> {
-								background-color: <?php echo esc_attr( $color ); ?>;
-							}
-							#post-<?php the_ID(); ?> .learn-more-link {
-								color: <?php echo esc_attr( $color ); ?>;
-								border-color: <?php echo esc_attr( $color ); ?>;
-							}
-							#post-<?php the_ID(); ?> .learn-more-link {
-								color: <?php echo esc_attr( $color ); ?>;
-								border-color: <?php echo esc_attr( $color ); ?>;
-							}
-							#post-<?php the_ID(); ?> .learn-more-link:hover {
-								background-color: <?php echo esc_attr( $color ); ?>;
-								color: #fff;
-							}
-							#post-<?php the_ID(); ?> .avatar.empty {
-								background-color: <?php echo esc_attr( $color ); ?>;
-							}
-						</style>
-						<?php the_title( '<h1 class="entry-title"><a href="' . get_permalink() . '">', '</a></h1>' ); ?>
-						<?php $plugin->projects->likes->display(); ?>
-						<div class="description">
-							<?php
-							if ( $plugin->projects->field_is_valid( 'summary' ) ) {
-								$plugin->projects->display_field( 'summary' );
-							};
-							?>
-							<p><a class="learn-more-link" href="<?php the_permalink(); ?>">Learn More</a></p>
-						</div>
-						<div class="actions">
-						<?php
-						if ( $plugin->projects->field_is_valid( 'roles' ) ) {
-							$plugin->projects->display_field( 'roles' );
-						};
-						?>
-						</div>
-					</article>
-					<?php
+					load_template( trailingslashit( $plugin->dir_path ) . 'templates/project-card.php', false );
 				}
 				wp_reset_postdata();
 				?>

@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying Project posts
+ * The template for displaying single Projects
  *
  * @package Flint
  */

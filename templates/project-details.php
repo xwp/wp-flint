@@ -1,4 +1,12 @@
-<?php global $flint_plugin; ?>
+<?php
+/**
+* The template for displaying the details tab of a single Project
+*
+* @package Flint
+*/
+
+global $flint_plugin;
+?>
 
 <?php if ( $flint_plugin->projects->field_is_valid( 'video_pitch' ) ) : ?>
 	<div class="entry-content container video-pitch">
