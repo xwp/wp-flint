@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying Project posts
+ * The template for displaying single Projects
  *
  * @package Flint
  */
@@ -9,13 +9,59 @@ global $flint_plugin, $post;
 
 get_header(); ?>
 
-<div id="primary" class="content-area">
+<div id="primary" class="content-area container">
 	<main id="main" class="site-main" role="main">
 		<?php
 		// Start the loop.
 		while ( have_posts() ) : the_post();
+			if ( $flint_plugin->projects->field_is_valid( 'feature_color' ) ) {
+				$color = get_field( 'feature_color' );
+			} else {
+				$color = 'inherit';
+			};
 			?>
 			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+				<style type="text/css">
+					#post-<?php the_ID(); ?> .entry-content a,
+					#post-<?php the_ID(); ?> .comments-area a {
+						color: <?php echo esc_attr( $color ); ?>;
+						text-decoration: none;
+					}
+					#post-<?php the_ID(); ?> .entry-content a:hover,
+					#post-<?php the_ID(); ?> .comments-area a:hover {
+						color: <?php echo esc_attr( $color ); ?>;
+						text-decoration: underline;
+					}
+					#post-<?php the_ID(); ?> blockquote {
+						border-color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .entry-title {
+						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .roles li {
+						background-color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .timeline li:hover .date {
+						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .tabs li.current {
+						border-bottom-color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> .tabs li.current a,
+					#post-<?php the_ID(); ?> .tabs li:hover a {
+						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> #discussion .comments-area .reply a,
+					#post-<?php the_ID(); ?> #discussion .comments-area input[type="submit"] {
+						border: 1px solid <?php echo esc_attr( $color ); ?>;
+						color: <?php echo esc_attr( $color ); ?>;
+					}
+					#post-<?php the_ID(); ?> #discussion .comments-area .reply a:hover,
+					#post-<?php the_ID(); ?> #discussion .comments-area input[type="submit"]:hover {
+						color: #ffffff;
+						background-color: <?php echo esc_attr( $color ); ?>;
+					}
+				</style>
 				<header class="entry-header">
 					<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
 					<?php
@@ -42,11 +88,11 @@ get_header(); ?>
 				?>
 				<nav class="tabs">
 					<ul>
-						<li class="current"><a href="#details"><?php esc_html_e( 'Project Description', 'flint' ); ?></a></li>
+						<li class="details current"><a href="#details"><?php esc_html_e( 'Details', 'flint' ); ?></a></li>
 						<?php if ( $updates_query->have_posts() ) : ?>
-						<li><a href="#updates"><?php esc_html_e( 'Updates', 'flint' ); ?></a></li>
+						<li class="updates"><a href="#updates"><?php esc_html_e( 'Updates', 'flint' ); ?></a></li>
 						<?php endif; ?>
-						<li><a href="#discussion"><?php esc_html_e( 'Discussion', 'flint' ); ?></a></li>
+						<li class="discussion"><a href="#discussion"><?php esc_html_e( 'Discussion', 'flint' ); ?></a></li>
 					</ul>
 				</nav>
 
