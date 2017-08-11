@@ -8,16 +8,6 @@
 global $flint_plugin;
 ?>
 <div class="entry-content container">
-	<?php
-	if ( ! is_single() ) {
-		$terms = wp_get_post_terms( get_the_ID(), $flint_plugin->projects->updates->tax_key );
-		if ( isset( $terms[0] ) && isset( $terms[0]->name ) ) {
-			echo wp_kses_post( sprintf( '<h2>%s: %s</h2>', $terms[0]->name, get_the_title() ) );
-		}
-	} else {
-		the_title( '<h2>', '</h2>' );
-	}
-	?>
 	<div class="entry-meta">
 	<?php
 	printf( '<span class="byline"><span class="author vcard">%1$s<span class="screen-reader-text">%2$s </span> <a class="url fn n" href="%3$s">%4$s</a></span></span>',
@@ -42,6 +32,17 @@ global $flint_plugin;
 	);
 	?>
 	</div>
+
+	<?php
+	if ( ! is_single() ) {
+		$terms = wp_get_post_terms( get_the_ID(), $flint_plugin->projects->updates->tax_key );
+		if ( isset( $terms[0] ) && isset( $terms[0]->name ) ) {
+			echo wp_kses_post( sprintf( '<h2 class="entry-title">%s: %s</h2>', $terms[0]->name, get_the_title() ) );
+		}
+	} else {
+		the_title( '<h2 class="entry-title">', '</h2>' );
+	}
+	?>
 
 	<?php the_content(); ?>
 
