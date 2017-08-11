@@ -46,19 +46,9 @@ class Roles implements Field_Group {
 
 		if ( have_rows( 'roles' ) ) {
 			echo '<ul class="roles">';
-			$can_join = is_user_logged_in() && is_single();
-			$role_index = $this->get_role_index( $post->ID );
+
+			$role_index    = $this->get_role_index( $post->ID );
 			$request_index = $this->request->get_request_index( $post->ID );
-
-			// Check if current user has a current request.
-			if ( $can_join && false !== $request_index ) {
-				$can_join = false;
-			}
-
-			// Check if current user is already a member.
-			if ( $can_join && false !== $role_index ) {
-				$can_join = false;
-			}
 
 			while( have_rows( 'roles' ) ) {
 				the_row();
@@ -77,14 +67,17 @@ class Roles implements Field_Group {
 							<span class="role"><?php echo esc_html( $role ); ?></span>
 							<span class="name"><?php echo esc_html( $user['display_name'] ); ?></span>
 						</div>
-					<?php elseif ( ! $can_join ) : ?>
-						<div class="waiting">
-							<span class="role"><?php echo esc_html( $role ); ?></span>
-						</div>
-					<?php else : ?>
+					<?php elseif ( is_single() && get_row_index() === $request_index ) : ?>
+                        <div class="closed">
+	                        <?php echo wp_kses_post( get_avatar( get_current_user_id(), 512 ) ); ?>
+                            <span class="avatar empty requested"></span>
+                            <span class="role"><?php echo esc_html( $role ); ?></span>
+                            <span class="requested"><?php _e( 'You have requested to join the team in this role.', 'flint' ) ?></span>
+                        </div>
+					<?php elseif ( is_user_logged_in() && is_single() && false === $request_index && false === $role_index ) : ?>
 						<div class="open">
 							<?php echo wp_kses_post( get_avatar( get_current_user_id(), 512 ) ); ?>
-							<span class="avatar empty <?php echo esc_attr( $request_index  === get_row_index() ? 'requested' : '' ); ?>"></span>
+							<span class="avatar empty"></span>
 							<span class="role"><?php echo esc_html( $role ); ?></span>
 							<input type="button" class="join" value="<?php esc_attr_e( 'Join the Team', 'flint' ) ?>" />
 							<form method="post" id="row-<?php echo esc_attr( get_row_index() ); ?>" class="row">
@@ -94,6 +87,10 @@ class Roles implements Field_Group {
 								<span class="requested"><?php esc_html_e( 'Requested' ); ?></span>
 							<?php endif; ?>
 						</div>
+					<?php else : ?>
+                        <div class="waiting">
+                            <span class="role"><?php echo esc_html( $role ); ?></span>
+                        </div>
 					<?php endif; ?>
 				</li>
 				<?php

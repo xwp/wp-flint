@@ -64,14 +64,9 @@
 	z-index: 10;
 	background: #fff;
 }
-.roles li .avatar.empty.request {
-	opacity: 0.1;
-}
-.roles li .avatar.empty.requested {
-	opacity: 0.9;
-}
 .roles li .requested {
 	font-style: italic;
+	font-size: 0.9em;
 }
 .roles li .join {
 	display: block;
@@ -103,7 +98,8 @@
 	height: 100%;
 }
 .project-archive .project .roles .role,
-.project-archive .project .roles .name {
+.project-archive .project .roles .name,
+.project-archive .project .roles .requested {
 	display: none;
 }
 /* Project Page Styling */
